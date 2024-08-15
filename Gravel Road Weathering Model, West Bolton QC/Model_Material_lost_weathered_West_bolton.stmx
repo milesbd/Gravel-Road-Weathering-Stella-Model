@@ -1,0 +1,2259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0" xmlns:isee="http://iseesystems.com/XMILE">
+	<header>
+		<smile version="1.0" namespace="std, isee" uses_arrays="1" uses_submodels=""/>
+		<name>Model_Material_lost_weathered_West_bolton</name>
+		<uuid>ad5ccf5c-fd10-4169-8f2c-d618afd0d075</uuid>
+		<vendor>isee systems, inc.</vendor>
+		<product version="1.9" isee:build_number="1841" isee:saved_by_v1="true" lang="en">Stella Architect</product>
+	</header>
+	<sim_specs isee:simulation_delay="0.454545" isee:restore_on_start="false" method="Euler" time_units="Years" isee:instantaneous_flows="false">
+		<start>0</start>
+		<stop>10</stop>
+		<dt reciprocal="true">12</dt>
+	</sim_specs>
+	<dimensions>
+		<dim name="Grain_Size_Distribution">
+			<elem name="mm20"/>
+			<elem name="mm14"/>
+			<elem name="mm5"/>
+			<elem name="mm1_25"/>
+			<elem name="mm0_315"/>
+			<elem name="mm0_080"/>
+			<elem name="mmlt0_080"/>
+		</dim>
+	</dimensions>
+	<isee:prefs show_module_prefix="true" live_update_on_drag="true" show_restore_buttons="true" layer="model" interface_max_page_width="10000" interface_max_page_height="10000" interface_min_page_width="0" interface_min_page_height="0" saved_runs="5" keep="false" rifp="false"/>
+	<isee:multiplayer_settings include_chat="true" allow_observers="false" advance_time_increment="1" observer_start_page="home_page" enabled="false"/>
+	<isee:time_formats default_format="Builtin">
+		<isee:time_format name="Builtin" type="adaptive"/>
+	</isee:time_formats>
+	<default_format precision="full"/>
+	<data>
+		<export resource="r../Data/stella_results.csv" interval="DT" precomputed="false" isee:format="numbers">
+			<all/>
+		</export>
+	</data>
+	<isee:sensi_specs_list active_index="0">
+		<isee:sensi_specs name="Weathering Rate Sensitivity" method="grid">
+			<isee:variable starting_value="0" ending_value="1" type="incremental" seed="12345" name="Monthly_Weathering_Rate_rate" num_samples="1"/>
+		</isee:sensi_specs>
+	</isee:sensi_specs_list>
+	<isee:optimizer_specs_list active_index="0">
+		<isee:optimizer_specs name="Optimization" method="Powell" additional_starts="0" report_interval="1" confidence_range="0"/>
+	</isee:optimizer_specs_list>
+	<isee:payoff_specs_list>
+		<isee:payoff_specs name="Payoff"/>
+	</isee:payoff_specs_list>
+	<model_units>
+		<unit name="Dimensionless">
+			<eqn>1</eqn>
+			<alias>dmnl</alias>
+			<alias>unitless</alias>
+			<alias>fraction</alias>
+		</unit>
+		<unit name="Cubic Meters">
+			<eqn>Meters^3</eqn>
+			<alias>cubic meter</alias>
+			<alias>cu m</alias>
+		</unit>
+		<unit name="Meters">
+			<eqn/>
+			<alias>m</alias>
+			<alias>meter</alias>
+		</unit>
+		<unit name="Square Meters">
+			<eqn>Meters^2</eqn>
+			<alias>sq m</alias>
+			<alias>square meter</alias>
+		</unit>
+		<unit name="Kilograms">
+			<eqn/>
+			<alias>kg</alias>
+			<alias>kilogram</alias>
+		</unit>
+		<unit name="Moles">
+			<eqn/>
+			<alias>mol</alias>
+			<alias>mole</alias>
+		</unit>
+		<unit name="Years">
+			<eqn/>
+			<alias>yr</alias>
+			<alias>year</alias>
+		</unit>
+	</model_units>
+	<model>
+		<isee:extra_collection_variables>
+			<isee:extra_collection_variable name="mm0_080_Input"/>
+			<isee:extra_collection_variable name="Gravel_Loss_Rate"/>
+			<isee:extra_collection_variable name="mm14_Input"/>
+			<isee:extra_collection_variable name="mm0_315_Input"/>
+			<isee:extra_collection_variable name="mm1_25_Input"/>
+			<isee:extra_collection_variable name="Weathering_by_Grain_Sizing[mm5]"/>
+			<isee:extra_collection_variable name="Total_available_Surface_Area"/>
+			<isee:extra_collection_variable name="mm20_Input"/>
+			<isee:extra_collection_variable name="Weathering_by_Grain_Sizing[mm20]"/>
+			<isee:extra_collection_variable name="Weathering_by_Grain_Sizing[mm0_315]"/>
+			<isee:extra_collection_variable name="Weathering_by_Grain_Sizing[mm0_080]"/>
+			<isee:extra_collection_variable name="Amount_of_Road_Material_Lost"/>
+			<isee:extra_collection_variable name="Gravel_Pos_Flux"/>
+			<isee:extra_collection_variable name="Grain_Count_by_Size[mm0_315]"/>
+			<isee:extra_collection_variable name="mm5_Input"/>
+			<isee:extra_collection_variable name="Grain_Count_by_Size[mm5]"/>
+			<isee:extra_collection_variable name='"Material_Lost_(road_depth)"'/>
+			<isee:extra_collection_variable name="Grain_Count_by_Size[mm20]"/>
+			<isee:extra_collection_variable name="Gravel_Addition"/>
+			<isee:extra_collection_variable name="Weathering_by_Grain_Sizing[mm14]"/>
+			<isee:extra_collection_variable name="Grain_Count_by_Size[mm1_25]"/>
+			<isee:extra_collection_variable name="Weathering_by_Grain_Sizing[mm1_25]"/>
+			<isee:extra_collection_variable name="Total_Mass_C02_Converted"/>
+			<isee:extra_collection_variable name="Percentage_of_Roadway_per_Particle_Size[mm5]"/>
+			<isee:extra_collection_variable name="Percentage_of_Roadway_per_Particle_Size[mm0_080]"/>
+			<isee:extra_collection_variable name="Gravel_Neg_Flux"/>
+			<isee:extra_collection_variable name="Percentage_of_Roadway_per_Particle_Size[mm0_315]"/>
+			<isee:extra_collection_variable name="Percentage_of_Roadway_per_Particle_Size[mm1_25]"/>
+			<isee:extra_collection_variable name="Percentage_of_Roadway_per_Particle_Size[mm14]"/>
+			<isee:extra_collection_variable name="Road_Depth"/>
+			<isee:extra_collection_variable name="Percentage_of_Roadway_per_Particle_Size[mm20]"/>
+			<isee:extra_collection_variable name="Percent_Old_Material"/>
+			<isee:extra_collection_variable name="Grain_Count_by_Size[mm14]"/>
+			<isee:extra_collection_variable name="Percent_New_Material"/>
+		</isee:extra_collection_variables>
+		<variables>
+			<aux name="Radii of Grains">
+				<dimensions>
+					<dim name="Grain_Size_Distribution"/>
+				</dimensions>
+				<element subscript="mm20">
+					<eqn>0.020/2</eqn>
+				</element>
+				<element subscript="mm14">
+					<eqn>0.014/2</eqn>
+				</element>
+				<element subscript="mm5">
+					<eqn>0.005/2</eqn>
+				</element>
+				<element subscript="mm1_25">
+					<eqn>0.00125/2</eqn>
+				</element>
+				<element subscript="mm0_315">
+					<eqn>0.000315/2</eqn>
+				</element>
+				<element subscript="mm0_080">
+					<eqn>0.000080/2</eqn>
+				</element>
+				<element subscript="mmlt0_080">
+					<eqn>0.000079/2</eqn>
+				</element>
+				<units>Meters</units>
+			</aux>
+			<aux name="Road Volume" access="output">
+				<eqn>Road_Length*Road_Depth*Road_Width*(1-Road_Porosity)</eqn>
+				<units>Cubic Meters</units>
+			</aux>
+			<aux name="Volumes of Grains">
+				<dimensions>
+					<dim name="Grain_Size_Distribution"/>
+				</dimensions>
+				<element subscript="mm20">
+					<eqn>(4/3)*PI*Radii_of_Grains[mm20]^3</eqn>
+				</element>
+				<element subscript="mm14">
+					<eqn>(4/3)*PI*Radii_of_Grains[mm14]^3</eqn>
+				</element>
+				<element subscript="mm5">
+					<eqn>(4/3)*PI*Radii_of_Grains[mm5]^3</eqn>
+				</element>
+				<element subscript="mm1_25">
+					<eqn>(4/3)*PI*Radii_of_Grains[mm1_25]^3</eqn>
+				</element>
+				<element subscript="mm0_315">
+					<eqn>(4/3)*PI*Radii_of_Grains[mm0_315]^3</eqn>
+				</element>
+				<element subscript="mm0_080">
+					<eqn>(4/3)*PI*Radii_of_Grains[mm0_080]^3</eqn>
+				</element>
+				<element subscript="mmlt0_080">
+					<eqn>(4/3)*PI*Radii_of_Grains[mmlt0_080]^3</eqn>
+				</element>
+				<units>cubic meters</units>
+			</aux>
+			<aux name="Road Width">
+				<eqn>8</eqn>
+				<units>meters</units>
+			</aux>
+			<aux name="Road Length" access="output">
+				<eqn>90000</eqn>
+				<units>meters</units>
+			</aux>
+			<aux name="Road Porosity">
+				<eqn>0.36</eqn>
+				<units>Dimensionless</units>
+			</aux>
+			<aux name="Area of Grains">
+				<dimensions>
+					<dim name="Grain_Size_Distribution"/>
+				</dimensions>
+				<element subscript="mm20">
+					<eqn>(4)*PI*Radii_of_Grains[mm20]^2</eqn>
+				</element>
+				<element subscript="mm14">
+					<eqn>(4)*PI*Radii_of_Grains[mm14]^2</eqn>
+				</element>
+				<element subscript="mm5">
+					<eqn>(4)*PI*Radii_of_Grains[mm5]^2</eqn>
+				</element>
+				<element subscript="mm1_25">
+					<eqn>(4)*PI*Radii_of_Grains[mm1_25]^2</eqn>
+				</element>
+				<element subscript="mm0_315">
+					<eqn>(4)*PI*Radii_of_Grains[mm0_315]^2</eqn>
+				</element>
+				<element subscript="mm0_080">
+					<eqn>(4)*PI*Radii_of_Grains[mm0_080]^2</eqn>
+				</element>
+				<element subscript="mmlt0_080">
+					<eqn>(4)*PI*Radii_of_Grains[mmlt0_080]^2</eqn>
+				</element>
+				<units>Square Meters</units>
+			</aux>
+			<aux name="Percentage of Roadway per Particle Size">
+				<dimensions>
+					<dim name="Grain_Size_Distribution"/>
+				</dimensions>
+				<element subscript="mm20">
+					<eqn>Road_Volume*mm20_Input</eqn>
+				</element>
+				<element subscript="mm14">
+					<eqn>Road_Volume*mm14_Input</eqn>
+				</element>
+				<element subscript="mm5">
+					<eqn>Road_Volume*mm5_Input</eqn>
+				</element>
+				<element subscript="mm1_25">
+					<eqn>Road_Volume*mm1_25_Input</eqn>
+				</element>
+				<element subscript="mm0_315">
+					<eqn>Road_Volume*mm0_315_Input</eqn>
+				</element>
+				<element subscript="mm0_080">
+					<eqn>Road_Volume*mm0_080_Input</eqn>
+				</element>
+				<element subscript="mmlt0_080">
+					<eqn>Road_Volume*mmlt0_080_Input</eqn>
+				</element>
+				<units>Cubic Meters</units>
+			</aux>
+			<aux name="Grain Count\nby Size">
+				<dimensions>
+					<dim name="Grain_Size_Distribution"/>
+				</dimensions>
+				<element subscript="mm20">
+					<eqn>Percentage_of_Roadway_per_Particle_Size[mm20]/Volumes_of_Grains[mm20]</eqn>
+				</element>
+				<element subscript="mm14">
+					<eqn>Percentage_of_Roadway_per_Particle_Size[mm14]/Volumes_of_Grains[mm14]</eqn>
+				</element>
+				<element subscript="mm5">
+					<eqn>Percentage_of_Roadway_per_Particle_Size[mm5]/Volumes_of_Grains[mm5]</eqn>
+				</element>
+				<element subscript="mm1_25">
+					<eqn>Percentage_of_Roadway_per_Particle_Size[mm1_25]/Volumes_of_Grains[mm1_25]</eqn>
+				</element>
+				<element subscript="mm0_315">
+					<eqn>Percentage_of_Roadway_per_Particle_Size[mm0_315]/Volumes_of_Grains[mm0_315]</eqn>
+				</element>
+				<element subscript="mm0_080">
+					<eqn>(Percentage_of_Roadway_per_Particle_Size[mm0_080] )/Volumes_of_Grains[mm0_080]</eqn>
+				</element>
+				<element subscript="mmlt0_080">
+					<eqn>(Percentage_of_Roadway_per_Particle_Size[mm0_080] + Material_Lost_as_Dust)/Volumes_of_Grains[mmlt0_080]</eqn>
+				</element>
+				<units>Unitless</units>
+			</aux>
+			<aux name="Available Surface\narea Per Grain Size">
+				<dimensions>
+					<dim name="Grain_Size_Distribution"/>
+				</dimensions>
+				<element subscript="mm20">
+					<eqn>Grain_Count_by_Size[mm20]*Area_of_Grains[mm20]</eqn>
+				</element>
+				<element subscript="mm14">
+					<eqn>Grain_Count_by_Size[mm14]*Area_of_Grains[mm14]</eqn>
+				</element>
+				<element subscript="mm5">
+					<eqn>Grain_Count_by_Size[mm5]*Area_of_Grains[mm5]</eqn>
+				</element>
+				<element subscript="mm1_25">
+					<eqn>Grain_Count_by_Size[mm1_25]*Area_of_Grains[mm1_25]</eqn>
+				</element>
+				<element subscript="mm0_315">
+					<eqn>Grain_Count_by_Size[mm0_315]*Area_of_Grains[mm0_315]</eqn>
+				</element>
+				<element subscript="mm0_080">
+					<eqn>Grain_Count_by_Size[mm0_080]*Area_of_Grains[mm0_080]</eqn>
+				</element>
+				<element subscript="mmlt0_080">
+					<eqn>Grain_Count_by_Size[mm0_080]*Area_of_Grains[mmlt0_080]</eqn>
+				</element>
+				<units>Square Meters</units>
+			</aux>
+			<aux name="Total available Surface Area">
+				<eqn>SUM(Available_Surface_area_Per_Grain_Size)</eqn>
+				<units>Square Meters</units>
+			</aux>
+			<aux name="Monthly Weathering\nRate rate">
+				<doc>4.47e-08 - Granite plagioclase 
+2.09e-07 - Oligoclase in Sweded
+4.17e-06 - Plastic Lake ontario Brantley 2003
+1.66e-05 - Flow-though Reactor
+
+2.09e-07
+4.17e-06
+1.66e-05</doc>
+				<eqn>1.36e-6/12</eqn>
+				<init_eqn>0.00001093716</init_eqn>
+				<units>mol/(square-meter)</units>
+			</aux>
+			<stock name="Total Mass\nC02 Converted">
+				<eqn>0</eqn>
+				<inflow>Total_Weathering</inflow>
+				<non_negative/>
+				<units>Kilograms</units>
+			</stock>
+			<flow name="Total Weathering">
+				<eqn>Total_available_Surface_Area*Monthly_Weathering_Rate_rate*Molecular_Weight_CO2*Mol_Ratio_Carbonic_Acid_Conversion</eqn>
+				<non_negative/>
+				<units>kg/yr</units>
+			</flow>
+			<aux name="Mol Ratio Carbonic Acid Conversion">
+				<eqn>2</eqn>
+				<units>unitless</units>
+			</aux>
+			<aux name="Molecular Weight\nCO2">
+				<eqn>0.04401</eqn>
+				<units>kg/mol</units>
+			</aux>
+			<aux name="Weathering\nby Grain Sizing">
+				<dimensions>
+					<dim name="Grain_Size_Distribution"/>
+				</dimensions>
+				<element subscript="mm20">
+					<eqn>Available_Surface_area_Per_Grain_Size[mm20]*Monthly_Weathering_Rate_rate*Molecular_Weight_CO2*Mol_Ratio_Carbonic_Acid_Conversion</eqn>
+				</element>
+				<element subscript="mm14">
+					<eqn>Available_Surface_area_Per_Grain_Size[mm14]*Monthly_Weathering_Rate_rate*Molecular_Weight_CO2*Mol_Ratio_Carbonic_Acid_Conversion</eqn>
+				</element>
+				<element subscript="mm5">
+					<eqn>Available_Surface_area_Per_Grain_Size[mm5]*Monthly_Weathering_Rate_rate*Molecular_Weight_CO2*Mol_Ratio_Carbonic_Acid_Conversion</eqn>
+				</element>
+				<element subscript="mm1_25">
+					<eqn>Available_Surface_area_Per_Grain_Size[mm1_25]*Monthly_Weathering_Rate_rate*Molecular_Weight_CO2*Mol_Ratio_Carbonic_Acid_Conversion</eqn>
+				</element>
+				<element subscript="mm0_315">
+					<eqn>Available_Surface_area_Per_Grain_Size[mm0_315]*Monthly_Weathering_Rate_rate*Molecular_Weight_CO2*Mol_Ratio_Carbonic_Acid_Conversion</eqn>
+				</element>
+				<element subscript="mm0_080">
+					<eqn>Available_Surface_area_Per_Grain_Size[mm0_080]*Monthly_Weathering_Rate_rate*Molecular_Weight_CO2*Mol_Ratio_Carbonic_Acid_Conversion</eqn>
+				</element>
+				<element subscript="mmlt0_080">
+					<eqn>Available_Surface_area_Per_Grain_Size[mmlt0_080]*Monthly_Weathering_Rate_rate*Molecular_Weight_CO2*Mol_Ratio_Carbonic_Acid_Conversion</eqn>
+				</element>
+				<units>Kilograms</units>
+			</aux>
+			<stock name="Road\nDepth">
+				<eqn>0.25</eqn>
+				<inflow>Gravel_Pos_Flux</inflow>
+				<outflow>Gravel_Neg_Flux</outflow>
+				<non_negative/>
+				<units>Meters</units>
+			</stock>
+			<flow name="Gravel Neg\nFlux">
+				<eqn>(Road_Depth*Gravel_Loss_Rate)</eqn>
+				<non_negative/>
+				<units>Meters/Year</units>
+			</flow>
+			<flow name="Gravel Pos\nFlux">
+				<eqn>Gravel_Addition</eqn>
+				<non_negative/>
+				<units>Meters/Year</units>
+			</flow>
+			<module name="Maintenance Frequency" isee:label="">
+				<format precision="auto"/>
+				<connect to=".Gravel_Addition" from="Maintenance_Frequency.Gravel_Addition"/>
+				<connect2 to="Gravel_Addition" from="Maintenance_Frequency.Gravel_Addition"/>
+				<connect to="Maintenance_Frequency.Amount_of_Road_Material_Lost" from=".Amount_of_Road_Material_Lost"/>
+				<connect2 to="Maintenance_Frequency.Amount_of_Road_Material_Lost" from="Amount_of_Road_Material_Lost"/>
+			</module>
+			<aux name="Gravel Addition" access="input">
+				<units>Meters</units>
+			</aux>
+			<module name="Gravel Flux" isee:label="">
+				<doc>This is thee decay of gravel sizes in old material</doc>
+				<format precision="auto"/>
+				<connect to=".Fmm25" from="Gravel_Flux.Fmm20"/>
+				<connect2 to="Fmm25" from="Gravel_Flux.Fmm20"/>
+				<connect to=".Fmm19" from="Gravel_Flux.Fmm14"/>
+				<connect2 to="Fmm19" from="Gravel_Flux.Fmm14"/>
+				<connect to=".Fmm4_75" from="Gravel_Flux.Fmm5"/>
+				<connect2 to="Fmm4_75" from="Gravel_Flux.Fmm5"/>
+				<connect to=".Fmm2_36" from="Gravel_Flux.Fmm1_25"/>
+				<connect2 to="Fmm2_36" from="Gravel_Flux.Fmm1_25"/>
+				<connect to=".Fmm0_425" from="Gravel_Flux.Fmm0_315"/>
+				<connect2 to="Fmm0_425" from="Gravel_Flux.Fmm0_315"/>
+				<connect to=".Fmm0_075" from="Gravel_Flux.Fmm0_080"/>
+				<connect2 to="Fmm0_075" from="Gravel_Flux.Fmm0_080"/>
+				<connect to=".ghost_of_Fmmlt_0_380" from="Gravel_Flux.Fmmlt_0_080"/>
+				<connect2 to="ghost_of_Fmmlt_0_380" from="Gravel_Flux.Fmmlt_0_080"/>
+			</module>
+			<aux name="Percent Old\nMaterial">
+				<eqn>1-Percent_New_Material</eqn>
+				<units>unitless</units>
+			</aux>
+			<aux name="Percent New\nMaterial">
+				<eqn>(Initial_Road_Depth-&quot;Material_Lost_(road_depth)&quot;)/Initial_Road_Depth</eqn>
+				<units>unitless</units>
+			</aux>
+			<stock name="Fmm25" access="input">
+				<units>unitless</units>
+			</stock>
+			<aux name="mm20\nInput">
+				<eqn>(Fmm25*Percent_Old_Material) +(Percent_New_Material*mm20_New_Distribution)</eqn>
+				<units>unitless</units>
+			</aux>
+			<aux name="mm20 New\nDistribution">
+				<eqn>0.07</eqn>
+				<units>unitless</units>
+			</aux>
+			<stock name="Fmm19" access="input">
+				<units>unitless</units>
+			</stock>
+			<aux name="mm14\nInput">
+				<eqn>(Fmm19*Percent_Old_Material)+(mm14_New_Disribution*Percent_New_Material)</eqn>
+				<units>unitless</units>
+			</aux>
+			<aux name="mm14 New\nDisribution">
+				<eqn>0.17</eqn>
+				<units>unitless</units>
+			</aux>
+			<stock name="Fmm4 75" access="input">
+				<units>unitless</units>
+			</stock>
+			<aux name="mm5\nInput">
+				<eqn>(Fmm4_75*Percent_Old_Material)+(mm5_New_Distribution*Percent_New_Material)</eqn>
+				<units>unitless</units>
+			</aux>
+			<aux name="mm5 New\nDistribution">
+				<eqn>0.34</eqn>
+				<units>unitless</units>
+			</aux>
+			<stock name="Fmm2 36" access="input">
+				<units>unitless</units>
+			</stock>
+			<aux name="mm1 25\nInput">
+				<eqn>(Fmm2_36*Percent_Old_Material)+(mm1_25_New_Distribution*Percent_New_Material)</eqn>
+				<units>unitless</units>
+			</aux>
+			<aux name="mm1 25 New\nDistribution">
+				<eqn>0.20</eqn>
+				<units>unitless</units>
+			</aux>
+			<stock name="Fmm0 425" access="input">
+				<units>unitless</units>
+			</stock>
+			<stock name="Fmm0 075" access="input">
+				<units>unitless</units>
+			</stock>
+			<aux name="mm0 315\nInput">
+				<eqn>(Fmm0_425*Percent_Old_Material)+(mm0_315_New_Distribution*Percent_New_Material)</eqn>
+				<units>unitless</units>
+			</aux>
+			<aux name="mm0 315 New\nDistribution">
+				<eqn>0.09</eqn>
+				<units>unitless</units>
+			</aux>
+			<aux name="mm0 080\nInput">
+				<eqn>(Fmm0_075*Percent_Old_Material)+(mm0_080_New_Distribution*Percent_New_Material)</eqn>
+				<units>unitless</units>
+			</aux>
+			<aux name="mm0 080 New\nDistribution">
+				<eqn>0.051</eqn>
+				<units>unitless</units>
+			</aux>
+			<module name="Gravel Loss" isee:label="">
+				<format precision="auto"/>
+				<connect to="Gravel_Loss.Road_Length" from=".Road_Length"/>
+				<connect2 to="Gravel_Loss.Road_Length" from="Road_Length"/>
+				<connect to="Gravel_Loss.Road_Volume" from=".Road_Volume"/>
+				<connect2 to="Gravel_Loss.Road_Volume" from="Road_Volume"/>
+				<connect to=".Gravel_Loss_Rate" from="Gravel_Loss.Gravel_Loss_Rate"/>
+				<connect2 to="Gravel_Loss_Rate" from="Gravel_Loss.Gravel_Loss_Rate"/>
+			</module>
+			<aux name="Gravel Loss Rate" access="input">
+				<units>unitless</units>
+			</aux>
+			<stock name="Material Lost (road depth)">
+				<eqn>0</eqn>
+				<inflow>Gravel_Neg_Flux</inflow>
+				<non_negative/>
+				<units>Meters</units>
+			</stock>
+			<aux name="Amount of Road\nMaterial Lost" access="output">
+				<eqn>(Initial_Road_Depth-Road_Depth) /DT</eqn>
+				<units>Meters/Year</units>
+			</aux>
+			<aux name="Initial Road\nDepth">
+				<eqn>0.25</eqn>
+				<units>Meters</units>
+			</aux>
+			<aux name="Material Lost as Dust">
+				<eqn>&quot;Material_Lost_(road_depth)&quot;*Road_Width*Road_Length*Road_Porosity</eqn>
+				<units>Cubic Meters</units>
+			</aux>
+			<stock name="ghost of Fmmlt 0 380" access="input">
+				<eqn>0.051</eqn>
+				<non_negative/>
+				<units>unitless</units>
+			</stock>
+			<aux name="mmlt0 080 New\nDistribution">
+				<eqn>0.079</eqn>
+				<units>unitless</units>
+			</aux>
+			<aux name="mmlt0 080\nInput">
+				<eqn>(ghost_of_Fmmlt_0_380*Percent_Old_Material)+(mmlt0_080_New_Distribution*Percent_New_Material)</eqn>
+				<units>unitless</units>
+			</aux>
+		</variables>
+		<views>
+			<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
+				<text_box color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt"/>
+				<isee:loop_indicator color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt"/>
+				<numeric_display color="blue" background="white" font_size="9pt" isee:transparent="false"/>
+				<graph color="black" background="white" font_size="12pt" axis_color="#666666" grid_color="#C8C8C8" isee:graph_area_color="white" legend_position="bottom" isee:transparent="false" isee:hide_border="false" axis_title_font_style="normal" axis_title_font_weight="normal" axis_title_text_decoration="none" axis_title_text_align="center" axis_title_vertical_text_align="center" axis_title_font_color="black" axis_title_font_family="Arial" axis_title_font_size="12pt" axis_title_text_padding="2" axis_title_text_border_color="black" axis_title_text_border_width="thin" axis_title_text_border_style="none" axis_label_font_style="normal" axis_label_font_weight="normal" axis_label_text_decoration="none" axis_label_text_align="center" axis_label_vertical_text_align="center" axis_label_font_color="black" axis_label_font_family="Arial" axis_label_font_size="9pt" axis_label_text_padding="2" axis_label_text_border_color="black" axis_label_text_border_width="thin" axis_label_text_border_style="none">
+					<isee:series_styles>
+						<isee:series_style color="blue" thickness="1"/>
+						<isee:series_style color="red" thickness="1" pen_style="dot_dashed"/>
+						<isee:series_style color="fuchsia" thickness="1" pen_style="dotted"/>
+						<isee:series_style color="#008F44" thickness="1" pen_style="dashed"/>
+						<isee:series_style color="#FF7F00" thickness="1"/>
+						<isee:series_style color="#7F00FF" thickness="1" pen_style="dot_dashed"/>
+						<isee:series_style color="#0CA0FF" thickness="1" pen_style="dotted"/>
+						<isee:series_style color="lime" thickness="1" pen_style="dashed"/>
+						<isee:series_style color="#FF007F" thickness="1"/>
+						<isee:series_style color="aqua" thickness="1" pen_style="dot_dashed"/>
+						<isee:series_style color="#F586FF" thickness="1" pen_style="dotted"/>
+						<isee:series_style color="black" thickness="1" pen_style="dashed"/>
+						<isee:series_style color="#C8C8C8" thickness="1"/>
+					</isee:series_styles>
+				</graph>
+				<table color="black" background="#E0E0E0" text_align="right" font_size="12pt" orientation="vertical" wrap_text="false" isee:auto_fit="true" isee:use_alternate_row_colors="false" isee:unlimited_table_length="false" blank_column_width="80" column_width="160" interval="1" report_balances="beginning" report_flows="instantaneous" header_font_style="normal" header_font_weight="normal" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="12pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
+				<button color="black" background="#E0E0E0" font_size="12pt" transparent="false" corner_radius="0" isee:flat="false" icon_side="top" isee:highlight_on_hover="false" isee:highlight_color="#959595"/>
+				<isee:annotation color="black" background="#E0E0E0" font_size="12pt" transparent="false" corner_radius="0" isee:flat="false" icon_side="top" isee:highlight_on_hover="false" isee:highlight_color="#959595" popup_background_color="#FFFECF"/>
+				<slider color="black" background="#E0E0E0" font_size="12pt" num_ticks="3" label_side="top" wrap_title="true" vertical="false" isee:fancy_appearance="false" isee:show_hover_tip="when_deciding" input_expands="true" input_width="100"/>
+				<isee:sim_speed_slider color="black" background="white"/>
+				<isee:time_slider color="#E95F74" background="silver"/>
+				<isee:pie_input color="black" background="white" font_size="12pt" legend_position="bottom" isee:transparent="false"/>
+				<knob color="#66CC66" background="#E0E0E0" font_size="12pt" label_side="bottom" wrap_title="true"/>
+				<numeric_input color="black" background="#E0E0E0" font_size="12pt" label_side="left" wrap_title="true" input_expands="false" input_width="100"/>
+				<switch color="black" background="#E0E0E0" font_size="12pt" label_side="top" wrap_title="true" isee:appearance="switch" isee:on_color="green"/>
+				<options color="black" background="white" appearance="radio-buttons" arrangement="vertical"/>
+				<graphical_input color="black" background="#E0E0E0" font_size="12pt" isee:show_hover_tip="true"/>
+				<group_input color="black" background="#E0E0E0" font_size="12pt"/>
+				<lamp color="black" background="white" font_size="9pt"/>
+				<gauge color="black" background="white" font_size="9pt" needle_color="#F09F72" bar_color="#EEEEEE" bar_progress_color="black" appearance="radial" num_major_ticks="11" num_minor_ticks="11" show_numeric_value="true"/>
+				<isee:spatial_map color="black" background="white" font_size="12pt"/>
+				<isee:animation_object color="black" background="white" font_size="12pt"/>
+				<isee:navigation_widget color="black" background="white" item_spacing="6" appearance="tabs" corner_radius="4" selected_item_color="black" selected_item_background="white" item_background="#DDDDDD"/>
+				<isee:shape color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid" opacity="1" transparent_background="true"/>
+				<isee:selector color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt"/>
+				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
+				<isee:financial_table color="black" background="white" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
+			</style>
+			<view isee:show_pages="false" background="white" page_width="584" page_height="764" isee:page_cols="5" isee:page_rows="3" isee:scroll_x="205" isee:scroll_y="193" isee:popup_graphs_are_comparative="true" type="stock_flow">
+				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
+					<stock color="blue" background="white" font_color="blue" font_size="9pt" label_side="top">
+						<shape type="rectangle" width="45" height="35"/>
+					</stock>
+					<flow color="blue" background="white" font_color="blue" font_size="9pt" label_side="bottom"/>
+					<isee:placeholder color="#228B22" background="white" font_color="#228B22" font_size="9pt" label_side="bottom"/>
+					<module color="blue" background="white" font_color="blue" font_size="9pt" label_side="top">
+						<shape type="rectangle" width="55" height="45"/>
+					</module>
+					<aux color="blue" background="white" font_color="blue" font_size="9pt" label_side="bottom">
+						<shape type="circle" radius="18"/>
+					</aux>
+					<group color="red" background="white" font_color="red" font_size="9pt"/>
+					<connector color="#FF007F" background="white" font_color="#FF007F" font_size="9pt" isee:thickness="1"/>
+					<text_box color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt"/>
+					<isee:loop_indicator color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt"/>
+					<numeric_display color="blue" background="white" font_size="9pt" isee:transparent="false"/>
+					<graph color="black" background="white" font_size="12pt" axis_color="#666666" grid_color="#C8C8C8" isee:graph_area_color="white" legend_position="bottom" isee:transparent="false" isee:hide_border="false" axis_title_font_style="normal" axis_title_font_weight="normal" axis_title_text_decoration="none" axis_title_text_align="center" axis_title_vertical_text_align="center" axis_title_font_color="black" axis_title_font_family="Arial" axis_title_font_size="12pt" axis_title_text_padding="2" axis_title_text_border_color="black" axis_title_text_border_width="thin" axis_title_text_border_style="none" axis_label_font_style="normal" axis_label_font_weight="normal" axis_label_text_decoration="none" axis_label_text_align="center" axis_label_vertical_text_align="center" axis_label_font_color="black" axis_label_font_family="Arial" axis_label_font_size="9pt" axis_label_text_padding="2" axis_label_text_border_color="black" axis_label_text_border_width="thin" axis_label_text_border_style="none">
+						<isee:series_styles>
+							<isee:series_style color="blue" thickness="1"/>
+							<isee:series_style color="red" thickness="1" pen_style="dot_dashed"/>
+							<isee:series_style color="fuchsia" thickness="1" pen_style="dotted"/>
+							<isee:series_style color="#008F44" thickness="1" pen_style="dashed"/>
+							<isee:series_style color="#FF7F00" thickness="1"/>
+							<isee:series_style color="#7F00FF" thickness="1" pen_style="dot_dashed"/>
+							<isee:series_style color="#0CA0FF" thickness="1" pen_style="dotted"/>
+							<isee:series_style color="lime" thickness="1" pen_style="dashed"/>
+							<isee:series_style color="#FF007F" thickness="1"/>
+							<isee:series_style color="aqua" thickness="1" pen_style="dot_dashed"/>
+							<isee:series_style color="#F586FF" thickness="1" pen_style="dotted"/>
+							<isee:series_style color="black" thickness="1" pen_style="dashed"/>
+							<isee:series_style color="#C8C8C8" thickness="1"/>
+						</isee:series_styles>
+					</graph>
+					<table color="black" background="#E0E0E0" text_align="right" font_size="12pt" orientation="vertical" wrap_text="false" isee:auto_fit="true" isee:use_alternate_row_colors="false" isee:unlimited_table_length="false" blank_column_width="80" column_width="160" interval="1" report_balances="beginning" report_flows="instantaneous" header_font_style="normal" header_font_weight="normal" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="12pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
+				</style>
+				<connector uid="1" angle="353.66">
+					<from>mm1_25_New_Distribution</from>
+					<to>mm1_25_Input</to>
+				</connector>
+				<connector uid="2" angle="180">
+					<from>mm14_New_Disribution</from>
+					<to>mm14_Input</to>
+				</connector>
+				<connector uid="3" angle="24.3765">
+					<from>Road_Width</from>
+					<to>Road_Volume</to>
+				</connector>
+				<connector uid="4" angle="142.306">
+					<from>Fmm25</from>
+					<to>mm20_Input</to>
+				</connector>
+				<connector uid="5" angle="345.964">
+					<from>Percent_Old_Material</from>
+					<to>mm14_Input</to>
+				</connector>
+				<connector uid="6" angle="240.255">
+					<from>Initial_Road_Depth</from>
+					<to>Percent_New_Material</to>
+				</connector>
+				<connector uid="7" angle="43.0401">
+					<from>mm0_080_Input</from>
+					<to>Percentage_of_Roadway_per_Particle_Size</to>
+				</connector>
+				<connector uid="8" angle="122.005">
+					<from>Road_Length</from>
+					<to>Gravel_Loss</to>
+				</connector>
+				<connector uid="9" angle="229.399">
+					<from>Molecular_Weight_CO2</from>
+					<to>Weathering_by_Grain_Sizing</to>
+				</connector>
+				<connector uid="10" angle="83.6598">
+					<from>mm5_Input</from>
+					<to>Percentage_of_Roadway_per_Particle_Size</to>
+				</connector>
+				<connector uid="11" angle="198.435">
+					<from>Amount_of_Road_Material_Lost</from>
+					<to>Maintenance_Frequency</to>
+				</connector>
+				<connector uid="12" angle="62.835">
+					<from>Fmm0_075</from>
+					<to>mm0_080_Input</to>
+				</connector>
+				<connector uid="13" angle="29.0546">
+					<from>Percent_Old_Material</from>
+					<to>mm1_25_Input</to>
+				</connector>
+				<connector uid="14" angle="180">
+					<from>mm20_New_Distribution</from>
+					<to>mm20_Input</to>
+				</connector>
+				<connector uid="15" angle="305.538">
+					<from>Radii_of_Grains</from>
+					<to>Area_of_Grains</to>
+				</connector>
+				<connector uid="16" angle="302.005">
+					<from>Available_Surface_area_Per_Grain_Size</from>
+					<to>Weathering_by_Grain_Sizing</to>
+				</connector>
+				<connector uid="17" angle="35.5377">
+					<from>Gravel_Addition</from>
+					<to>Gravel_Pos_Flux</to>
+				</connector>
+				<connector uid="18" angle="71.5651">
+					<from>Mol_Ratio_Carbonic_Acid_Conversion</from>
+					<to>Total_Weathering</to>
+				</connector>
+				<connector uid="19" angle="102.529">
+					<from>Percent_New_Material</from>
+					<to>mm1_25_Input</to>
+				</connector>
+				<connector uid="20" angle="1.78991">
+					<from>mm0_315_New_Distribution</from>
+					<to>mm0_315_Input</to>
+				</connector>
+				<connector uid="21" angle="333.435">
+					<from>Percent_Old_Material</from>
+					<to>mm20_Input</to>
+				</connector>
+				<connector uid="22" angle="347.712">
+					<from>Road_Volume</from>
+					<to>Percentage_of_Roadway_per_Particle_Size</to>
+				</connector>
+				<connector uid="23" angle="160.201">
+					<from>Gravel_Loss</from>
+					<to>Gravel_Loss_Rate</to>
+				</connector>
+				<connector uid="24" angle="12.5288">
+					<from>Percentage_of_Roadway_per_Particle_Size</from>
+					<to>Grain_Count_by_Size</to>
+				</connector>
+				<connector uid="25" angle="77.4712">
+					<from>mm1_25_Input</from>
+					<to>Percentage_of_Roadway_per_Particle_Size</to>
+				</connector>
+				<connector uid="26" angle="37.6942">
+					<from>Fmm0_425</from>
+					<to>mm0_315_Input</to>
+				</connector>
+				<connector uid="27" angle="282.529">
+					<from>Area_of_Grains</from>
+					<to>Available_Surface_area_Per_Grain_Size</to>
+				</connector>
+				<connector uid="28" angle="343.35">
+					<from>Road_Depth</from>
+					<to>Road_Volume</to>
+				</connector>
+				<connector uid="29" angle="198.435">
+					<from>Monthly_Weathering_Rate_rate</from>
+					<to>Weathering_by_Grain_Sizing</to>
+				</connector>
+				<connector uid="30" angle="110.556">
+					<from>mm14_Input</from>
+					<to>Percentage_of_Roadway_per_Particle_Size</to>
+				</connector>
+				<connector uid="31" angle="33.3084">
+					<from>Initial_Road_Depth</from>
+					<to>Amount_of_Road_Material_Lost</to>
+				</connector>
+				<connector uid="32" angle="37.6942">
+					<from>Fmm2_36</from>
+					<to>mm1_25_Input</to>
+				</connector>
+				<connector uid="33" angle="12.5288">
+					<from>Percent_Old_Material</from>
+					<to>mm5_Input</to>
+				</connector>
+				<connector uid="34" angle="255.069">
+					<from>Road_Depth</from>
+					<to>Amount_of_Road_Material_Lost</to>
+				</connector>
+				<connector uid="35" angle="270">
+					<from>Volumes_of_Grains</from>
+					<to>Grain_Count_by_Size</to>
+				</connector>
+				<connector uid="36" angle="122.905">
+					<from>Road_Depth</from>
+					<to>Gravel_Neg_Flux</to>
+				</connector>
+				<connector uid="37" angle="338.962">
+					<from>Available_Surface_area_Per_Grain_Size</from>
+					<to>Total_available_Surface_Area</to>
+				</connector>
+				<connector uid="38" angle="130.601">
+					<from>mm20_Input</from>
+					<to>Percentage_of_Roadway_per_Particle_Size</to>
+				</connector>
+				<connector uid="39" angle="294.162">
+					<from>Road_Length</from>
+					<to>Road_Volume</to>
+				</connector>
+				<connector uid="40" angle="237.995">
+					<from>Radii_of_Grains</from>
+					<to>Volumes_of_Grains</to>
+				</connector>
+				<connector uid="41" angle="147.995">
+					<from>Percent_Old_Material</from>
+					<to>mm0_080_Input</to>
+				</connector>
+				<connector uid="42" angle="0">
+					<from>Percent_New_Material</from>
+					<to>mm20_Input</to>
+				</connector>
+				<connector uid="43" angle="333.435">
+					<from>Gravel_Loss_Rate</from>
+					<to>Gravel_Neg_Flux</to>
+				</connector>
+				<connector uid="44" angle="243.435">
+					<from>Percent_New_Material</from>
+					<to>Percent_Old_Material</to>
+				</connector>
+				<connector uid="45" angle="143.973">
+					<from>Fmm19</from>
+					<to>mm14_Input</to>
+				</connector>
+				<connector uid="46" angle="90">
+					<from>Road_Porosity</from>
+					<to>Road_Volume</to>
+				</connector>
+				<connector uid="47" angle="77.4712">
+					<from>Percent_New_Material</from>
+					<to>mm5_Input</to>
+				</connector>
+				<connector uid="48" angle="7.37515">
+					<from>mm0_080_New_Distribution</from>
+					<to>mm0_080_Input</to>
+				</connector>
+				<connector uid="49" angle="63.4349">
+					<from>mm0_315_Input</from>
+					<to>Percentage_of_Roadway_per_Particle_Size</to>
+				</connector>
+				<connector uid="50" angle="172.875">
+					<from>Percent_New_Material</from>
+					<to>mm0_315_Input</to>
+				</connector>
+				<connector uid="51" angle="215.538">
+					<from>Mol_Ratio_Carbonic_Acid_Conversion</from>
+					<to>Weathering_by_Grain_Sizing</to>
+				</connector>
+				<connector uid="52" angle="192.529">
+					<from>Percent_New_Material</from>
+					<to>mm0_080_Input</to>
+				</connector>
+				<connector uid="53" angle="324.462">
+					<from>Total_available_Surface_Area</from>
+					<to>Total_Weathering</to>
+				</connector>
+				<connector uid="54" angle="26.5651">
+					<from>Percent_New_Material</from>
+					<to>mm14_Input</to>
+				</connector>
+				<connector uid="55" angle="142.306">
+					<from>Fmm4_75</from>
+					<to>mm5_Input</to>
+				</connector>
+				<connector uid="56" angle="42.1266">
+					<from>Maintenance_Frequency</from>
+					<to>Gravel_Addition</to>
+				</connector>
+				<connector uid="57" angle="45">
+					<from>Molecular_Weight_CO2</from>
+					<to>Total_Weathering</to>
+				</connector>
+				<connector uid="58" angle="144.462">
+					<from>Road_Volume</from>
+					<to>Gravel_Loss</to>
+				</connector>
+				<connector uid="59" angle="6.34019">
+					<from>Grain_Count_by_Size</from>
+					<to>Available_Surface_area_Per_Grain_Size</to>
+				</connector>
+				<connector uid="60" angle="102.529">
+					<from>Percent_Old_Material</from>
+					<to>mm0_315_Input</to>
+				</connector>
+				<connector uid="61" angle="173.66">
+					<from>mm5_New_Distribution</from>
+					<to>mm5_Input</to>
+				</connector>
+				<connector uid="62" angle="143.183">
+					<from>Monthly_Weathering_Rate_rate</from>
+					<to>Total_Weathering</to>
+				</connector>
+				<stacked_container uid="63" x="1681.57" y="496.143" width="492" height="282" visible_index="5" minimized="true" name="Graph 1">
+					<graph background="#FFFFC9" width="492" height="282" type="time_series" isee:points_only="false" show_grid="true" include_units_in_legend="false" plot_numbers="true" isee:label_pie_slices="false" num_x_grid_lines="5" num_y_grid_lines="5" num_x_labels="5" num_y_labels="3" title="Untitled" isee:fill_intensity="0.1" left_axis_multi_scale="true" left_axis_auto_scale="true" right_axis_multi_scale="true" right_axis_auto_scale="true">
+						<plot color="fuchsia" pen_width="1" index="0" show_y_axis="true">
+							<entity name="Percent_New_Material"/>
+						</plot>
+						<plot color="blue" pen_width="1" index="1" show_y_axis="true">
+							<entity name="Percent_Old_Material"/>
+						</plot>
+						<plot color="#008F44" pen_width="1" index="2" show_y_axis="true">
+							<entity name="Road_Depth"/>
+						</plot>
+					</graph>
+					<graph width="492" height="282" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
+						<plot color="blue" pen_width="1" index="0" show_y_axis="true">
+							<entity name="Total_Mass_C02_Converted"/>
+						</plot>
+					</graph>
+					<graph background="#FFFFC9" width="492" height="282" type="time_series" isee:points_only="false" show_grid="true" include_units_in_legend="false" plot_numbers="true" isee:label_pie_slices="false" num_x_grid_lines="5" num_y_grid_lines="5" num_x_labels="5" num_y_labels="3" title="Untitled" isee:fill_intensity="0.1" left_axis_multi_scale="true" left_axis_auto_scale="true" right_axis_multi_scale="true" right_axis_auto_scale="true">
+						<plot color="blue" pen_width="1" index="0" show_y_axis="true">
+							<entity name="Percentage_of_Roadway_per_Particle_Size[mm1_25]"/>
+						</plot>
+						<plot color="red" pen_width="1" index="1" show_y_axis="true">
+							<entity name="Percentage_of_Roadway_per_Particle_Size[mm0_315]"/>
+						</plot>
+						<plot color="fuchsia" pen_width="1" index="2" show_y_axis="true">
+							<entity name="Percentage_of_Roadway_per_Particle_Size[mm0_080]"/>
+						</plot>
+					</graph>
+					<graph background="#FFFFC9" width="492" height="282" type="time_series" isee:points_only="false" show_grid="true" include_units_in_legend="false" plot_numbers="true" isee:label_pie_slices="false" num_x_grid_lines="5" num_y_grid_lines="5" num_x_labels="5" num_y_labels="3" title="Untitled" isee:fill_intensity="0.1" left_axis_multi_scale="true" left_axis_auto_scale="true" right_axis_multi_scale="true" right_axis_auto_scale="true">
+						<plot color="blue" pen_width="1" index="0" show_y_axis="true">
+							<entity name="Percentage_of_Roadway_per_Particle_Size[mm20]"/>
+						</plot>
+						<plot color="red" pen_width="1" index="1" show_y_axis="true">
+							<entity name="Percentage_of_Roadway_per_Particle_Size[mm14]"/>
+						</plot>
+						<plot color="fuchsia" pen_width="1" index="2" show_y_axis="true">
+							<entity name="Percentage_of_Roadway_per_Particle_Size[mm5]"/>
+						</plot>
+					</graph>
+					<graph background="#FFFFC9" width="492" height="282" type="time_series" isee:points_only="false" show_grid="true" include_units_in_legend="false" plot_numbers="true" isee:label_pie_slices="false" num_x_grid_lines="5" num_y_grid_lines="5" num_x_labels="5" num_y_labels="3" title="Untitled" isee:fill_intensity="0.1" left_axis_multi_scale="true" left_axis_auto_scale="true" right_axis_multi_scale="true" right_axis_auto_scale="true">
+						<plot color="blue" pen_width="1" index="0" show_y_axis="true">
+							<entity name="Grain_Count_by_Size[mm20]"/>
+						</plot>
+						<plot color="red" pen_width="1" index="1" show_y_axis="true">
+							<entity name="Grain_Count_by_Size[mm14]"/>
+						</plot>
+						<plot color="fuchsia" pen_width="1" index="2" show_y_axis="true">
+							<entity name="Grain_Count_by_Size[mm5]"/>
+						</plot>
+						<plot color="#008F44" pen_width="1" index="3" show_y_axis="true">
+							<entity name="Grain_Count_by_Size[mm1_25]"/>
+						</plot>
+						<plot color="#FF7F00" pen_width="1" index="4" show_y_axis="true">
+							<entity name="Grain_Count_by_Size[mm0_315]"/>
+						</plot>
+					</graph>
+					<graph width="492" height="282" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
+						<plot color="blue" pen_width="1" index="0" show_y_axis="true">
+							<entity name="Material_Lost_as_Dust"/>
+						</plot>
+						<plot color="red" pen_style="dot_dashed" pen_width="1" index="1" show_y_axis="true">
+							<entity name="Percentage_of_Roadway_per_Particle_Size[mm0_080]"/>
+						</plot>
+					</graph>
+				</stacked_container>
+				<stacked_container uid="64" x="1580" y="23.75" width="786" height="410" visible_index="1" minimized="true" name="Table 1">
+					<table background="#E0E0E0" font_size="9pt" orientation="vertical" column_width="88" interval="DT" report_balances="ending" report_flows="summed" width="786" height="410" title="Untitled Table">
+						<item type="time"/>
+						<item>
+							<format precision="0.01" scale_by="1" delimit_000s="true"/>
+							<entity name="Road_Depth"/>
+						</item>
+						<item>
+							<format precision="0.01" scale_by="1" delimit_000s="true"/>
+							<entity name="Percent_New_Material"/>
+						</item>
+						<item>
+							<format precision="0.01" scale_by="1" delimit_000s="true"/>
+							<entity name="Percent_Old_Material"/>
+						</item>
+					</table>
+					<table background="#E0E0E0" font_size="9pt" orientation="vertical" column_width="107" interval="DT" report_balances="ending" report_flows="summed" width="786" height="410" title="Untitled Table">
+						<item type="time"/>
+						<item>
+							<format precision="max" scale_by="1" delimit_000s="true"/>
+							<entity name="Gravel_Neg_Flux"/>
+						</item>
+						<item>
+							<format precision="max" scale_by="1" delimit_000s="true"/>
+							<entity name="Gravel_Pos_Flux"/>
+						</item>
+						<item>
+							<format precision="max" scale_by="1" delimit_000s="true"/>
+							<entity name="Amount_of_Road_Material_Lost"/>
+						</item>
+						<item>
+							<format precision="max" scale_by="1" delimit_000s="true"/>
+							<entity name="Percent_New_Material"/>
+						</item>
+						<item>
+							<format precision="max" scale_by="1" delimit_000s="true"/>
+							<entity name="Percent_Old_Material"/>
+						</item>
+						<item>
+							<format precision="0.01" scale_by="1" delimit_000s="true"/>
+							<entity name='"Material_Lost_(road_depth)"'/>
+						</item>
+						<item>
+							<entity name="Total_Mass_C02_Converted"/>
+						</item>
+						<item>
+							<entity name="Road_Volume"/>
+						</item>
+					</table>
+				</stacked_container>
+				<aux color="blue" label_angle="127.757" x="931" y="223" name="Radii of Grains"/>
+				<aux color="blue" label_angle="50.2795" x="569" y="343" name="Road Volume"/>
+				<aux color="blue" label_angle="182.183" x="893" y="270" name="Volumes of Grains"/>
+				<aux color="blue" label_angle="129.721" x="505" y="372" name="Road Width"/>
+				<aux color="blue" label_angle="37.5064" x="536.25" y="270" name="Road Length"/>
+				<aux color="blue" label_angle="282.451" x="522" y="406" name="Road Porosity"/>
+				<aux color="blue" label_angle="26.6818" x="964" y="270" name="Area of Grains"/>
+				<aux color="blue" label_angle="99.4031" x="670" y="365" name="Percentage of Roadway per Particle Size"/>
+				<aux color="blue" label_angle="32.7733" x="891" y="349" name="Grain Count\nby Size"/>
+				<aux color="blue" label_angle="17.609" x="979" y="352" name="Available Surface\narea Per Grain Size"/>
+				<aux color="blue" label_angle="30.4442" x="1076.5" y="389.5" name="Total available Surface Area"/>
+				<aux color="blue" label_angle="357.956" x="1435" y="460" name="Monthly Weathering\nRate rate"/>
+				<stock color="blue" label_side="right" x="1395" y="367.75" name="Total Mass\nC02 Converted"/>
+				<flow color="blue" label_angle="86.553" x="1303.75" y="361.75" name="Total Weathering">
+					<pts>
+						<pt x="1247" y="275"/>
+						<pt x="1247" y="361.75"/>
+						<pt x="1372.5" y="361.75"/>
+					</pts>
+				</flow>
+				<aux color="blue" label_side="right" label_angle="45" x="1304" y="464" name="Mol Ratio Carbonic Acid Conversion"/>
+				<aux color="blue" label_angle="177.729" x="1250" y="454" name="Molecular Weight\nCO2"/>
+				<aux x="1183" y="538" name="Weathering\nby Grain Sizing"/>
+				<stock color="blue" label_side="center" x="462" y="311" name="Road\nDepth"/>
+				<flow color="blue" label_angle="102.502" x="398.75" y="295" name="Gravel Neg\nFlux">
+					<pts>
+						<pt x="439.5" y="295"/>
+						<pt x="358" y="295"/>
+						<pt x="358" y="239.5"/>
+					</pts>
+				</flow>
+				<flow label_side="bottom" x="394.75" y="327" name="Gravel Pos\nFlux">
+					<pts>
+						<pt x="362" y="393"/>
+						<pt x="362" y="327"/>
+						<pt x="439.5" y="327"/>
+					</pts>
+				</flow>
+				<module color="blue" label_angle="274.234" x="191" y="464" name="Maintenance Frequency"/>
+				<aux color="blue" font_weight="bold" label_angle="184.708" x="327" y="341" name="Gravel Addition"/>
+				<module color="#596A74" font_color="#596A74" x="749" y="888" name="Gravel Flux"/>
+				<aux color="blue" label_angle="213.749" x="564" y="801" name="Percent Old\nMaterial"/>
+				<aux color="blue" label_angle="335.667" x="672" y="809" name="Percent New\nMaterial"/>
+				<stock color="blue" font_weight="bold" label_side="center" x="988" y="669" name="Fmm25"/>
+				<aux color="blue" label_angle="23.5704" x="924" y="619" name="mm20\nInput"/>
+				<aux color="blue" label_side="right" x="977" y="619" name="mm20 New\nDistribution"/>
+				<stock color="blue" font_weight="bold" label_side="center" x="855" y="667" name="Fmm19"/>
+				<aux color="blue" label_angle="37.2333" x="808" y="622" name="mm14\nInput"/>
+				<aux color="blue" label_angle="358.51" x="852" y="623" name="mm14 New\nDisribution"/>
+				<stock color="blue" font_weight="bold" label_side="center" x="742" y="666" name="Fmm4 75"/>
+				<aux color="blue" label_side="right" label_angle="45" x="689" y="623" name="mm5\nInput"/>
+				<aux color="blue" label_angle="357.294" x="722" y="623" name="mm5 New\nDistribution"/>
+				<stock color="blue" font_weight="bold" label_side="center" x="615" y="666" name="Fmm2 36"/>
+				<aux color="blue" label_angle="135.613" x="660" y="621" name="mm1 25\nInput"/>
+				<aux color="blue" label_side="left" x="625" y="620" name="mm1 25 New\nDistribution"/>
+				<stock color="blue" font_weight="bold" label_side="center" x="478" y="668" name="Fmm0 425"/>
+				<stock color="blue" font_weight="bold" label_side="center" x="367.833" y="669" name="Fmm0 075"/>
+				<aux color="blue" label_angle="136.48" x="530" y="620" name="mm0 315\nInput"/>
+				<aux color="blue" label_side="left" x="498" y="621" name="mm0 315 New\nDistribution"/>
+				<aux color="blue" label_angle="138.466" x="420.667" y="597.833" name="mm0 080\nInput"/>
+				<aux color="blue" label_side="left" x="380.75" y="603" name="mm0 080 New\nDistribution"/>
+				<module x="511" y="139" name="Gravel Loss"/>
+				<aux color="blue" font_weight="bold" x="321" y="299" name="Gravel Loss Rate"/>
+				<stock x="356" y="222" name="Material Lost (road depth)"/>
+				<aux color="blue" label_angle="144.476" x="323" y="493" name="Amount of Road\nMaterial Lost"/>
+				<aux color="blue" label_side="left" x="236" y="550.167" name="Initial Road\nDepth"/>
+				<connector uid="65" angle="163.896">
+					<from>
+						<alias uid="66"/>
+					</from>
+					<to>Percent_New_Material</to>
+				</connector>
+				<aux x="671" y="223" name="Material Lost as Dust"/>
+				<connector uid="67" angle="11.5467">
+					<from>&quot;Material_Lost_(road_depth)&quot;</from>
+					<to>Material_Lost_as_Dust</to>
+				</connector>
+				<connector uid="68" angle="326.083">
+					<from>Material_Lost_as_Dust</from>
+					<to>Grain_Count_by_Size</to>
+				</connector>
+				<connector uid="69" angle="69.1254">
+					<from>Road_Width</from>
+					<to>Material_Lost_as_Dust</to>
+				</connector>
+				<connector uid="70" angle="41.1859">
+					<from>Road_Length</from>
+					<to>Material_Lost_as_Dust</to>
+				</connector>
+				<connector uid="71" angle="32.4712">
+					<from>Road_Porosity</from>
+					<to>Material_Lost_as_Dust</to>
+				</connector>
+				<stacked_container uid="72" x="1022.82" y="932.053" width="626.25" height="551.614">
+					<graph font_size="14pt" grid_color="#D9DBDE" axis_label_font_size="10pt" width="626.25" height="551.614" type="scatter" x_axis_auto_scale="true" connect_dots="false" single_point="false" show_grid="true" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="11" num_y_grid_lines="11" num_x_labels="11" num_y_labels="11" title="Particle size distribution over time" isee:fill_intensity="0.1" x_axis_title="Time (years)" left_axis_title="Volume (cubic meters)" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
+						<plot color="blue" isee:at_time="1" pen_width="1" index="0" show_y_axis="true">
+							<entity name="Percentage_of_Roadway_per_Particle_Size[*]"/>
+						</plot>
+						<plot color="blue" pen_width="1" index="1" show_y_axis="true"/>
+					</graph>
+				</stacked_container>
+				<stacked_container uid="73" x="1198.75" y="583.5" width="455" height="324.375">
+					<graph font_family="Times New Roman" font_size="14pt" axis_color="#3D3D3F" grid_color="#DEDFE3" isee:transparent="false" axis_title_font_family="Times New Roman" axis_label_font_family="Times New Roman" width="455" height="324.375" type="time_series" isee:points_only="false" show_grid="true" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="11" num_y_grid_lines="6" num_x_labels="11" num_y_labels="6" title="Total Mass CO2 Converted over Time " isee:fill_intensity="0.1" x_axis_title="Time (years)" left_axis_title="Mass (kilograms)" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
+						<plot color="blue" title="Total CO2 transformed" pen_width="1" index="0" show_y_axis="true">
+							<entity name="Total_Mass_C02_Converted"/>
+						</plot>
+					</graph>
+				</stacked_container>
+				<stock font_style="italic" font_weight="bold" label_side="center" x="255" y="669" name="ghost of Fmmlt 0 380"/>
+				<aux color="blue" label_side="left" x="236" y="615.833" name="mmlt0 080 New\nDistribution"/>
+				<aux color="blue" label_angle="138.466" x="327" y="562.833" name="mmlt0 080\nInput"/>
+				<connector uid="74" angle="68.1986">
+					<from>mmlt0_080_New_Distribution</from>
+					<to>mmlt0_080_Input</to>
+				</connector>
+				<connector uid="75" angle="76.1682">
+					<from>ghost_of_Fmmlt_0_380</from>
+					<to>mmlt0_080_Input</to>
+				</connector>
+				<connector uid="76" angle="221.1">
+					<from>Percent_New_Material</from>
+					<to>mmlt0_080_Input</to>
+				</connector>
+				<connector uid="77" angle="200.556">
+					<from>Percent_Old_Material</from>
+					<to>mmlt0_080_Input</to>
+				</connector>
+				<connector uid="78" angle="27.0934">
+					<from>mmlt0_080_Input</from>
+					<to>Percentage_of_Roadway_per_Particle_Size</to>
+				</connector>
+				<numeric_display font_size="14pt" uid="79" x="1319.42" y="524.667" width="301" height="35.3333" retain_ending_value="true" isee:navigate_to="false" show_name="true">
+					<entity name="Total_Mass_C02_Converted"/>
+				</numeric_display>
+				<numeric_display uid="80" x="1538.5" y="252" width="177" height="16" retain_ending_value="true" isee:navigate_to="false" show_name="true">
+					<entity name="Material_Lost_as_Dust"/>
+				</numeric_display>
+				<stacked_container uid="81" x="752.167" y="374" width="490.833" height="250" minimized="true">
+					<table orientation="vertical" interval="DT" report_balances="beginning" report_flows="instantaneous" width="490.833" height="250" title="Particle Size Breadwon">
+						<item type="time"/>
+						<item>
+							<entity name="Percentage_of_Roadway_per_Particle_Size[mm20]"/>
+						</item>
+						<item>
+							<entity name="Percentage_of_Roadway_per_Particle_Size[mm14]"/>
+						</item>
+						<item>
+							<entity name="Percentage_of_Roadway_per_Particle_Size[mm5]"/>
+						</item>
+						<item>
+							<entity name="Percentage_of_Roadway_per_Particle_Size[mm1_25]"/>
+						</item>
+						<item>
+							<entity name="Percentage_of_Roadway_per_Particle_Size[mm0_315]"/>
+						</item>
+						<item>
+							<entity name="Percentage_of_Roadway_per_Particle_Size[mm0_080]"/>
+						</item>
+						<item>
+							<entity name="Percentage_of_Roadway_per_Particle_Size[mmlt0_080]"/>
+						</item>
+					</table>
+				</stacked_container>
+				<stacked_container uid="82" x="1945" y="664">
+					<table interval="DT" report_balances="beginning" report_flows="instantaneous" width="350" height="250" title="Total Mass CO2 Converted">
+						<item type="time"/>
+						<item>
+							<entity name="Total_Mass_C02_Converted"/>
+						</item>
+					</table>
+				</stacked_container>
+				<alias font_style="italic" uid="66" x="864.25" y="853.5" width="45" height="35">
+					<of>&quot;Material_Lost_(road_depth)&quot;</of>
+				</alias>
+			</view>
+			<view background="white" page_width="1492" page_height="611" zoom="85" home_view="true" type="interface">
+				<style/>
+				<stacked_container uid="83" x="4" y="26" width="492" height="282" visible_index="1">
+					<graph background="#FFFFC9" x="250" y="167" type="bar" show_grid="true" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="5" num_y_grid_lines="5" num_x_labels="5" num_y_labels="3" title="Weathering By Grain Size" isee:fill_intensity="0.1" left_axis_multi_scale="true" left_axis_auto_scale="true" right_axis_multi_scale="true" right_axis_auto_scale="true">
+						<plot color="blue" pen_width="1" index="0" show_y_axis="true">
+							<entity name="Weathering_by_Grain_Sizing[mm1_25]"/>
+						</plot>
+						<plot color="red" pen_width="1" index="1" show_y_axis="true">
+							<entity name="Weathering_by_Grain_Sizing[mm0_315]"/>
+						</plot>
+						<plot color="fuchsia" pen_width="1" index="2" show_y_axis="true">
+							<entity name="Weathering_by_Grain_Sizing[mm0_080]"/>
+						</plot>
+					</graph>
+					<graph background="#FFFFC9" x="250" y="167" type="time_series" isee:points_only="false" show_grid="true" include_units_in_legend="false" plot_numbers="true" isee:label_pie_slices="false" num_x_grid_lines="5" num_y_grid_lines="5" num_x_labels="5" num_y_labels="3" title="Depth + Surface Area" isee:fill_intensity="0.1" left_axis_multi_scale="true" left_axis_auto_scale="true" right_axis_multi_scale="true" right_axis_auto_scale="true">
+						<plot color="blue" pen_width="1" index="0" show_y_axis="true">
+							<format precision="max" scale_by="1"/>
+							<entity name="Road_Depth"/>
+						</plot>
+						<plot color="red" pen_width="1" index="1" show_y_axis="true">
+							<entity name="Total_available_Surface_Area"/>
+						</plot>
+						<plot color="fuchsia" pen_width="1" index="2" show_y_axis="true">
+							<entity name="Total_Mass_C02_Converted"/>
+						</plot>
+					</graph>
+					<graph background="#FFFFC9" x="250" y="167" type="bar" show_grid="true" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="5" num_y_grid_lines="5" num_x_labels="5" num_y_labels="3" title="Untitled" isee:fill_intensity="0.1" left_axis_multi_scale="true" left_axis_auto_scale="true" right_axis_multi_scale="true" right_axis_auto_scale="true">
+						<plot color="blue" pen_width="1" index="0" show_y_axis="true">
+							<entity name="Weathering_by_Grain_Sizing[mm20]"/>
+						</plot>
+						<plot color="red" pen_width="1" index="1" show_y_axis="true">
+							<entity name="Weathering_by_Grain_Sizing[mm14]"/>
+						</plot>
+						<plot color="fuchsia" pen_width="1" index="2" show_y_axis="true">
+							<entity name="Weathering_by_Grain_Sizing[mm5]"/>
+						</plot>
+					</graph>
+				</stacked_container>
+				<stacked_container uid="84" x="-0.176471" y="308" width="492" height="282">
+					<graph background="#FFFFC9" x="245.824" y="449" type="time_series" isee:points_only="false" show_grid="true" include_units_in_legend="false" plot_numbers="true" isee:label_pie_slices="false" num_x_grid_lines="5" num_y_grid_lines="5" num_x_labels="5" num_y_labels="3" title="Untitled" isee:fill_intensity="0.1" left_axis_multi_scale="true" left_axis_auto_scale="true" right_axis_multi_scale="true" right_axis_auto_scale="true">
+						<plot color="blue" pen_width="1" index="0" show_y_axis="true">
+							<entity name="Total_Mass_C02_Converted"/>
+						</plot>
+					</graph>
+				</stacked_container>
+			</view>
+			<view background="white" page_width="1492" page_height="611" zoom="85" type="interface">
+				<style/>
+				<stacked_container uid="85" x="210" y="26" width="492" height="282" visible_index="1">
+					<graph background="#FFFFC9" x="456" y="167" type="time_series" isee:points_only="false" show_grid="true" include_units_in_legend="false" plot_numbers="true" isee:label_pie_slices="false" num_x_grid_lines="5" num_y_grid_lines="5" num_x_labels="5" num_y_labels="3" title="Gravel Loss" doc="Annotation Legend:    &lt;insert all notes you want saved before this line&gt;   Fmm0 075      0.17         0.92   " isee:fill_intensity="0.1" left_axis_multi_scale="true" left_axis_auto_scale="true" right_axis_multi_scale="true" right_axis_auto_scale="true">
+						<plot color="blue" pen_width="1" index="0" show_y_axis="true">
+							<format precision="max" scale_by="1"/>
+							<entity name="mm0_080_Input"/>
+						</plot>
+						<plot color="red" pen_width="1" index="1" show_y_axis="true">
+							<format precision="max" scale_by="1"/>
+							<entity name="mm0_315_Input"/>
+						</plot>
+						<plot color="fuchsia" pen_width="1" index="2" show_y_axis="true">
+							<format precision="max" scale_by="1"/>
+							<entity name="mm1_25_Input"/>
+						</plot>
+					</graph>
+					<graph background="#FFFFC9" x="456" y="167" type="time_series" isee:points_only="false" show_grid="true" include_units_in_legend="false" plot_numbers="true" isee:label_pie_slices="false" num_x_grid_lines="5" num_y_grid_lines="5" num_x_labels="5" num_y_labels="3" title="Untitled" isee:fill_intensity="0.1" left_axis_multi_scale="true" left_axis_auto_scale="true" right_axis_multi_scale="true" right_axis_auto_scale="true">
+						<plot color="blue" pen_width="1" index="0" show_y_axis="true">
+							<format precision="max" scale_by="1"/>
+							<entity name="mm5_Input"/>
+						</plot>
+						<plot color="red" pen_width="1" index="1" show_y_axis="true">
+							<format precision="max" scale_by="1"/>
+							<entity name="mm14_Input"/>
+						</plot>
+						<plot color="fuchsia" pen_width="1" index="2" show_y_axis="true">
+							<format precision="max" scale_by="1"/>
+							<entity name="mm20_Input"/>
+						</plot>
+					</graph>
+				</stacked_container>
+			</view>
+			<view background="white" page_width="1492" page_height="611" zoom="45" type="interface">
+				<style/>
+				<stacked_container uid="86" x="2.17647" y="2.47059" width="1442.76" height="370.784">
+					<table background="#E0E0E0" font_size="9pt" orientation="vertical" column_width="190" interval="DT" report_balances="ending" report_flows="summed" width="1442.76" height="370.784" title="Weathering Per Particle SIze">
+						<item type="time"/>
+						<item>
+							<format precision="max" scale_by="1" delimit_000s="true"/>
+							<entity name="Weathering_by_Grain_Sizing[mm20]"/>
+						</item>
+						<item>
+							<format precision="max" scale_by="1" delimit_000s="true"/>
+							<entity name="Weathering_by_Grain_Sizing[mm14]"/>
+						</item>
+						<item>
+							<format precision="max" scale_by="1" delimit_000s="true"/>
+							<entity name="Weathering_by_Grain_Sizing[mm5]"/>
+						</item>
+						<item>
+							<format precision="max" scale_by="1" delimit_000s="true"/>
+							<entity name="Weathering_by_Grain_Sizing[mm1_25]"/>
+						</item>
+						<item>
+							<format precision="max" scale_by="1" delimit_000s="true"/>
+							<entity name="Weathering_by_Grain_Sizing[mm0_315]"/>
+						</item>
+						<item>
+							<format precision="0.01" scale_by="1" delimit_000s="true"/>
+							<entity name="Weathering_by_Grain_Sizing[mm0_080]"/>
+						</item>
+						<item>
+							<format precision="0.01" scale_by="1" delimit_000s="true"/>
+							<entity name="Total_Mass_C02_Converted"/>
+						</item>
+					</table>
+				</stacked_container>
+			</view>
+			<view background="white" page_width="1492" page_height="611" zoom="45" type="interface">
+				<style/>
+				<stacked_container uid="87" x="3.74556" y="3.74544" width="561.235" height="418.104">
+					<table background="#E0E0E0" font_size="9pt" orientation="vertical" column_width="68" interval="DT" report_balances="ending" report_flows="summed" width="561.235" height="418.104" title="Percent Composition of Gravel Sizes">
+						<item type="time"/>
+						<item>
+							<format precision="max" scale_by="1" delimit_000s="true"/>
+							<entity name="mm0_080_Input"/>
+						</item>
+						<item>
+							<format precision="max" scale_by="1" delimit_000s="true"/>
+							<entity name="mm0_315_Input"/>
+						</item>
+						<item>
+							<format precision="max" scale_by="1" delimit_000s="true"/>
+							<entity name="mm1_25_Input"/>
+						</item>
+						<item>
+							<format precision="max" scale_by="1" delimit_000s="true"/>
+							<entity name="mm5_Input"/>
+						</item>
+						<item>
+							<format precision="max" scale_by="1" delimit_000s="true"/>
+							<entity name="mm14_Input"/>
+						</item>
+						<item>
+							<format precision="max" scale_by="1" delimit_000s="true"/>
+							<entity name="mm20_Input"/>
+						</item>
+					</table>
+				</stacked_container>
+			</view>
+			<view background="white" page_width="1492" page_height="611" zoom="45" type="interface">
+				<style/>
+				<stacked_container uid="88" x="8.11111" y="7.66667" width="824" height="363.333">
+					<table background="#E0E0E0" font_size="9pt" orientation="vertical" column_width="81" interval="DT" report_balances="ending" report_flows="summed" width="824" height="363.333" title="Untitled Table">
+						<item type="time"/>
+						<item>
+							<format precision="max" scale_by="1" delimit_000s="true"/>
+							<entity name="Gravel_Flux.Fmm0_080"/>
+						</item>
+						<item>
+							<format precision="max" scale_by="1" delimit_000s="true"/>
+							<entity name="Gravel_Flux.Fmm0_315"/>
+						</item>
+						<item>
+							<format precision="max" scale_by="1" delimit_000s="true"/>
+							<entity name="Gravel_Flux.Fmm14"/>
+						</item>
+						<item>
+							<format precision="max" scale_by="1" delimit_000s="true"/>
+							<entity name="Gravel_Flux.Fmm20"/>
+						</item>
+						<item>
+							<format precision="max" scale_by="1" delimit_000s="true"/>
+							<entity name="Gravel_Flux.Fmm1_25"/>
+						</item>
+						<item>
+							<format precision="max" scale_by="1" delimit_000s="true"/>
+							<entity name="Gravel_Flux.Fmm5"/>
+						</item>
+					</table>
+				</stacked_container>
+			</view>
+			<view background="white" page_width="1492" page_height="611" zoom="45" type="interface">
+				<style/>
+				<stacked_container uid="89" x="9.66667" y="7.66667" width="1444.44" height="404.778">
+					<table background="#E0E0E0" font_size="9pt" orientation="vertical" column_width="103" interval="DT" report_balances="ending" report_flows="summed" width="1444.44" height="404.778" comparative="true" title="Total Mass CO2 Weathered">
+						<item type="time"/>
+						<item>
+							<format precision="0.01" scale_by="1" delimit_000s="true"/>
+							<entity name="Total_Mass_C02_Converted"/>
+						</item>
+						<item>
+							<format precision="0.01" scale_by="1" delimit_000s="true"/>
+							<entity name="Total_Mass_C02_Converted"/>
+						</item>
+						<item>
+							<format precision="0.01" scale_by="1" delimit_000s="true"/>
+							<entity name="Total_Mass_C02_Converted"/>
+						</item>
+						<item>
+							<format precision="0.01" scale_by="1" delimit_000s="true"/>
+							<entity name="Total_Mass_C02_Converted"/>
+						</item>
+						<item>
+							<format precision="0.01" scale_by="1" delimit_000s="true"/>
+							<entity name="Total_Mass_C02_Converted"/>
+						</item>
+						<item>
+							<format precision="0.01" scale_by="1" delimit_000s="true"/>
+							<entity name="Total_Mass_C02_Converted"/>
+						</item>
+						<item>
+							<format precision="0.01" scale_by="1" delimit_000s="true"/>
+							<entity name="Total_Mass_C02_Converted"/>
+						</item>
+						<item>
+							<format precision="0.01" scale_by="1" delimit_000s="true"/>
+							<entity name="Total_Mass_C02_Converted"/>
+						</item>
+						<item>
+							<format precision="0.01" scale_by="1" delimit_000s="true"/>
+							<entity name="Total_Mass_C02_Converted"/>
+						</item>
+						<item>
+							<format precision="0.01" scale_by="1" delimit_000s="true"/>
+							<entity name="Total_Mass_C02_Converted"/>
+						</item>
+						<item>
+							<format precision="0.01" scale_by="1" delimit_000s="true"/>
+							<entity name="Total_Mass_C02_Converted"/>
+						</item>
+						<item>
+							<format precision="0.01" scale_by="1" delimit_000s="true"/>
+							<entity name="Total_Mass_C02_Converted"/>
+						</item>
+					</table>
+				</stacked_container>
+			</view>
+			<view background="white" page_width="1492" page_height="611" type="interface">
+				<style/>
+				<stacked_container uid="90" x="37" y="-106" width="465" height="286">
+					<table background="#E0E0E0" font_size="9pt" orientation="vertical" column_width="105" interval="DT" report_balances="ending" report_flows="summed" width="465" height="286" comparative="true" title="Untitled Table">
+						<item type="time"/>
+						<item>
+							<format precision="0.01" scale_by="1" delimit_000s="true"/>
+							<entity name="Total_available_Surface_Area"/>
+						</item>
+						<item>
+							<format precision="0.01" scale_by="1" delimit_000s="true"/>
+							<entity name="Total_available_Surface_Area"/>
+						</item>
+						<item>
+							<format precision="0.01" scale_by="1" delimit_000s="true"/>
+							<entity name="Total_available_Surface_Area"/>
+						</item>
+						<item>
+							<format precision="0.01" scale_by="1" delimit_000s="true"/>
+							<entity name="Total_available_Surface_Area"/>
+						</item>
+						<item>
+							<format precision="0.01" scale_by="1" delimit_000s="true"/>
+							<entity name="Total_available_Surface_Area"/>
+						</item>
+						<item>
+							<format precision="0.01" scale_by="1" delimit_000s="true"/>
+							<entity name="Total_available_Surface_Area"/>
+						</item>
+						<item>
+							<format precision="0.01" scale_by="1" delimit_000s="true"/>
+							<entity name="Total_available_Surface_Area"/>
+						</item>
+						<item>
+							<format precision="0.01" scale_by="1" delimit_000s="true"/>
+							<entity name="Total_available_Surface_Area"/>
+						</item>
+					</table>
+				</stacked_container>
+			</view>
+			<isee:templates>
+				<view background="white" page_width="1492" page_height="611" zoom="85" type="template">
+					<style/>
+				</view>
+			</isee:templates>
+			<isee:stories/>
+		</views>
+	</model>
+	<model name="Gravel_Flux">
+		<variables>
+			<stock name="Fmm20" access="output">
+				<eqn>0.07</eqn>
+				<outflow>mm20_mm14_Decay</outflow>
+				<outflow>mm20_mm0_080_Decay</outflow>
+				<outflow>mm20_mm0_315_Decay</outflow>
+				<outflow>mm20_mm1_25_Decay</outflow>
+				<outflow>mm20_mm5_Decay</outflow>
+				<outflow>mm20_mmlt0_080_Decay</outflow>
+				<non_negative/>
+				<units>unitless</units>
+			</stock>
+			<stock name="Fmm14" access="output">
+				<eqn>0.17</eqn>
+				<inflow>mm20_mm14_Decay</inflow>
+				<outflow>mm14_mm5_Decay</outflow>
+				<outflow>mm14_mm0_080_Decay</outflow>
+				<outflow>mm14_mm0_315_Decay</outflow>
+				<outflow>mm14_mm1_25_Decay</outflow>
+				<outflow>mm14_mmlt0_080_Decay</outflow>
+				<non_negative/>
+				<units>unitless</units>
+			</stock>
+			<stock name="Fmm5" access="output">
+				<eqn>0.34</eqn>
+				<inflow>mm14_mm5_Decay</inflow>
+				<inflow>mm20_mm5_Decay</inflow>
+				<outflow>mm5_mm1_25_Decay</outflow>
+				<outflow>mm5_mm0_080_Decay</outflow>
+				<outflow>mm5_mm0_315_Decay</outflow>
+				<outflow>mm5_mmlt0_080_Decay</outflow>
+				<non_negative/>
+				<units>unitless</units>
+			</stock>
+			<stock name="Fmm1 25" access="output">
+				<eqn>0.20</eqn>
+				<inflow>mm5_mm1_25_Decay</inflow>
+				<inflow>mm20_mm1_25_Decay</inflow>
+				<inflow>mm14_mm1_25_Decay</inflow>
+				<outflow>mm1_25_mm0_315_Decay</outflow>
+				<outflow>mm1_25_mm0_080_Decay</outflow>
+				<non_negative/>
+				<units>unitless</units>
+			</stock>
+			<flow name="mm20 mm14\nDecay">
+				<eqn>Fmm20*Rate_of_Change_in_Composition</eqn>
+				<non_negative/>
+				<units>Per Year</units>
+			</flow>
+			<flow name="mm14 mm5\nDecay">
+				<eqn>Fmm14*Rate_of_Change_in_Composition</eqn>
+				<non_negative/>
+				<units>Per Year</units>
+			</flow>
+			<flow name="mm5 mm1 25\nDecay">
+				<eqn>Fmm5*Rate_of_Change_in_Composition</eqn>
+				<non_negative/>
+				<units>Per Year</units>
+			</flow>
+			<stock name="Fmm0 315" access="output">
+				<eqn>0.9</eqn>
+				<inflow>mm1_25_mm0_315_Decay</inflow>
+				<inflow>mm20_mm0_315_Decay</inflow>
+				<inflow>mm14_mm0_315_Decay</inflow>
+				<inflow>mm5_mm0_315_Decay</inflow>
+				<outflow>mm0_315_mm0_080_Decay</outflow>
+				<non_negative/>
+				<units>unitless</units>
+			</stock>
+			<flow name="mm1 25 mm0 315\nDecay">
+				<eqn>Fmm1_25*Rate_of_Change_in_Composition</eqn>
+				<non_negative/>
+				<units>Per Year</units>
+			</flow>
+			<stock name="Fmm0 080" access="output">
+				<eqn>0.051</eqn>
+				<inflow>mm0_315_mm0_080_Decay</inflow>
+				<inflow>mm20_mm0_080_Decay</inflow>
+				<inflow>mm14_mm0_080_Decay</inflow>
+				<inflow>mm5_mm0_080_Decay</inflow>
+				<inflow>mm1_25_mm0_080_Decay</inflow>
+				<outflow>mm0_080_mmlt0_080_Decay</outflow>
+				<non_negative/>
+				<units>unitless</units>
+			</stock>
+			<flow name="mm0 315 mm0 080\nDecay">
+				<eqn>Fmm0_315*Rate_of_Change_in_Composition</eqn>
+				<non_negative/>
+				<units>Per Year</units>
+			</flow>
+			<flow name="mm20 mm0 080 Decay">
+				<eqn>Fmm20*Rate_of_Change_in_Composition</eqn>
+				<non_negative/>
+				<units>Per Year</units>
+			</flow>
+			<flow name="mm20 mm0 315 Decay">
+				<eqn>Fmm20*Rate_of_Change_in_Composition</eqn>
+				<non_negative/>
+				<units>Per Year</units>
+			</flow>
+			<flow name="mm20 mm1 25 Decay">
+				<eqn>Fmm20*Rate_of_Change_in_Composition</eqn>
+				<non_negative/>
+				<units>Per Year</units>
+			</flow>
+			<flow name="mm20 mm5 Decay">
+				<eqn>Fmm20*Rate_of_Change_in_Composition</eqn>
+				<non_negative/>
+				<units>Per Year</units>
+			</flow>
+			<flow name="mm14 mm0 080 Decay">
+				<eqn>Fmm14*Rate_of_Change_in_Composition</eqn>
+				<non_negative/>
+				<units>Per Year</units>
+			</flow>
+			<flow name="mm14 mm0 315 Decay">
+				<eqn>Fmm14*Rate_of_Change_in_Composition</eqn>
+				<non_negative/>
+				<units>Per Year</units>
+			</flow>
+			<flow name="mm14 mm1 25 Decay">
+				<eqn>Fmm14*Rate_of_Change_in_Composition</eqn>
+				<non_negative/>
+				<units>Per Year</units>
+			</flow>
+			<flow name="mm5 mm0 080 Decay">
+				<eqn>Fmm5*Rate_of_Change_in_Composition</eqn>
+				<non_negative/>
+				<units>Per Year</units>
+			</flow>
+			<flow name="mm5 mm0 315 Decay">
+				<eqn>Fmm5*Rate_of_Change_in_Composition</eqn>
+				<non_negative/>
+				<units>Per Year</units>
+			</flow>
+			<flow name="mm1 25 mm0 080 Decay">
+				<eqn>Fmm1_25*Rate_of_Change_in_Composition</eqn>
+				<non_negative/>
+				<units>Per Year</units>
+			</flow>
+			<aux name="Rate of Change in Composition">
+				<eqn>0.36/12</eqn>
+				<units>Change per Month</units>
+			</aux>
+			<stock name="Fmmlt 0 080" access="output">
+				<eqn>0.079</eqn>
+				<inflow>mm0_080_mmlt0_080_Decay</inflow>
+				<inflow>mm20_mmlt0_080_Decay</inflow>
+				<inflow>mm14_mmlt0_080_Decay</inflow>
+				<inflow>mm5_mmlt0_080_Decay</inflow>
+				<inflow>mm1_25_mmlt0_080_Decay</inflow>
+				<non_negative/>
+				<units>unitless</units>
+			</stock>
+			<flow name="mm0 080 mmlt0 080\nDecay">
+				<eqn>Fmm0_080*Rate_of_Change_in_Composition</eqn>
+				<non_negative/>
+				<units>Per Year</units>
+			</flow>
+			<flow name="mm20 mmlt0 080 Decay">
+				<eqn>Fmm20*Rate_of_Change_in_Composition</eqn>
+				<non_negative/>
+				<units>Per Year</units>
+			</flow>
+			<flow name="mm14 mmlt0 080 Decay">
+				<eqn>Fmm14*Rate_of_Change_in_Composition</eqn>
+				<non_negative/>
+				<units>Per Year</units>
+			</flow>
+			<flow name="mm5 mmlt0 080 Decay">
+				<eqn>Fmm5*Rate_of_Change_in_Composition</eqn>
+				<non_negative/>
+				<units>Per Year</units>
+			</flow>
+			<flow name="mm1 25 mmlt0 080 Decay">
+				<eqn>Fmm1_25*Rate_of_Change_in_Composition</eqn>
+				<non_negative/>
+				<units>Per Year</units>
+			</flow>
+		</variables>
+		<views>
+			<view isee:show_pages="false" background="white" page_width="584" page_height="764" isee:page_cols="3" isee:page_rows="2" isee:scroll_x="4" isee:scroll_y="104" isee:popup_graphs_are_comparative="true" type="stock_flow">
+				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
+					<stock color="blue" background="white" font_color="blue" font_size="9pt" label_side="top">
+						<shape type="rectangle" width="45" height="35"/>
+					</stock>
+					<flow color="blue" background="white" font_color="blue" font_size="9pt" label_side="bottom"/>
+					<isee:placeholder color="#228B22" background="white" font_color="#228B22" font_size="9pt" label_side="bottom"/>
+					<module color="blue" background="white" font_color="blue" font_size="9pt" label_side="top">
+						<shape type="rectangle" width="55" height="45"/>
+					</module>
+					<aux color="blue" background="white" font_color="blue" font_size="9pt" label_side="bottom">
+						<shape type="circle" radius="18"/>
+					</aux>
+					<group color="red" background="white" font_color="red" font_size="9pt"/>
+					<connector color="#FF007F" background="white" font_color="#FF007F" font_size="9pt" isee:thickness="1"/>
+					<text_box color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt"/>
+					<isee:loop_indicator color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt"/>
+					<numeric_display color="blue" background="white" font_size="9pt" isee:transparent="false"/>
+					<graph color="black" background="white" font_size="12pt" axis_color="#666666" grid_color="#C8C8C8" isee:graph_area_color="white" legend_position="bottom" isee:transparent="false" isee:hide_border="false" axis_title_font_style="normal" axis_title_font_weight="normal" axis_title_text_decoration="none" axis_title_text_align="center" axis_title_vertical_text_align="center" axis_title_font_color="black" axis_title_font_family="Arial" axis_title_font_size="12pt" axis_title_text_padding="2" axis_title_text_border_color="black" axis_title_text_border_width="thin" axis_title_text_border_style="none" axis_label_font_style="normal" axis_label_font_weight="normal" axis_label_text_decoration="none" axis_label_text_align="center" axis_label_vertical_text_align="center" axis_label_font_color="black" axis_label_font_family="Arial" axis_label_font_size="9pt" axis_label_text_padding="2" axis_label_text_border_color="black" axis_label_text_border_width="thin" axis_label_text_border_style="none">
+						<isee:series_styles>
+							<isee:series_style color="blue" thickness="1"/>
+							<isee:series_style color="red" thickness="1" pen_style="dot_dashed"/>
+							<isee:series_style color="fuchsia" thickness="1" pen_style="dotted"/>
+							<isee:series_style color="#008F44" thickness="1" pen_style="dashed"/>
+							<isee:series_style color="#FF7F00" thickness="1"/>
+							<isee:series_style color="#7F00FF" thickness="1" pen_style="dot_dashed"/>
+							<isee:series_style color="#0CA0FF" thickness="1" pen_style="dotted"/>
+							<isee:series_style color="lime" thickness="1" pen_style="dashed"/>
+							<isee:series_style color="#FF007F" thickness="1"/>
+							<isee:series_style color="aqua" thickness="1" pen_style="dot_dashed"/>
+							<isee:series_style color="#F586FF" thickness="1" pen_style="dotted"/>
+							<isee:series_style color="black" thickness="1" pen_style="dashed"/>
+							<isee:series_style color="#C8C8C8" thickness="1"/>
+						</isee:series_styles>
+					</graph>
+					<table color="black" background="#E0E0E0" text_align="right" font_size="12pt" orientation="vertical" wrap_text="false" isee:auto_fit="true" isee:use_alternate_row_colors="false" isee:unlimited_table_length="false" blank_column_width="80" column_width="160" interval="1" report_balances="beginning" report_flows="instantaneous" header_font_style="normal" header_font_weight="normal" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="12pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
+				</style>
+				<connector uid="91" angle="210.579">
+					<from>Fmm5</from>
+					<to>mm5_mm1_25_Decay</to>
+				</connector>
+				<connector uid="92" angle="150.945">
+					<from>
+						<alias uid="93"/>
+					</from>
+					<to>mm1_25_mm0_315_Decay</to>
+				</connector>
+				<connector uid="94" angle="293.962">
+					<from>Fmm14</from>
+					<to>mm14_mm0_315_Decay</to>
+				</connector>
+				<connector uid="95" angle="63.4349">
+					<from>Fmm1_25</from>
+					<to>mm1_25_mm0_080_Decay</to>
+				</connector>
+				<connector uid="96" angle="282.529">
+					<from>Rate_of_Change_in_Composition</from>
+					<to>mm5_mm0_315_Decay</to>
+				</connector>
+				<connector uid="97" angle="86.6335">
+					<from>Fmm5</from>
+					<to>mm5_mm0_315_Decay</to>
+				</connector>
+				<connector uid="98" angle="0">
+					<from>
+						<alias uid="99"/>
+					</from>
+					<to>mm20_mm5_Decay</to>
+				</connector>
+				<connector uid="100" angle="6.34019">
+					<from>
+						<alias uid="99"/>
+					</from>
+					<to>mm20_mm1_25_Decay</to>
+				</connector>
+				<connector uid="101" angle="280.62">
+					<from>Fmm14</from>
+					<to>mm14_mm1_25_Decay</to>
+				</connector>
+				<connector uid="102" angle="6.34019">
+					<from>
+						<alias uid="99"/>
+					</from>
+					<to>mm20_mm0_080_Decay</to>
+				</connector>
+				<connector uid="103" angle="339.444">
+					<from>
+						<alias uid="93"/>
+					</from>
+					<to>mm14_mm0_080_Decay</to>
+				</connector>
+				<connector uid="104" angle="295.201">
+					<from>Fmm20</from>
+					<to>mm20_mm1_25_Decay</to>
+				</connector>
+				<connector uid="105" angle="32.0054">
+					<from>
+						<alias uid="93"/>
+					</from>
+					<to>mm14_mm5_Decay</to>
+				</connector>
+				<connector uid="106" angle="87.2229">
+					<from>
+						<alias uid="93"/>
+					</from>
+					<to>mm5_mm1_25_Decay</to>
+				</connector>
+				<connector uid="107" angle="202.249">
+					<from>Fmm1_25</from>
+					<to>mm1_25_mm0_315_Decay</to>
+				</connector>
+				<connector uid="108" angle="77.4712">
+					<from>Fmm5</from>
+					<to>mm5_mm0_080_Decay</to>
+				</connector>
+				<connector uid="109" angle="180">
+					<from>
+						<alias uid="93"/>
+					</from>
+					<to>mm0_315_mm0_080_Decay</to>
+				</connector>
+				<connector uid="110" angle="21.8014">
+					<from>
+						<alias uid="93"/>
+					</from>
+					<to>mm20_mm14_Decay</to>
+				</connector>
+				<connector uid="111" angle="277.595">
+					<from>Fmm20</from>
+					<to>mm20_mm5_Decay</to>
+				</connector>
+				<connector uid="112" angle="187.765">
+					<from>Fmm14</from>
+					<to>mm14_mm5_Decay</to>
+				</connector>
+				<connector uid="113" angle="187.765">
+					<from>Fmm0_315</from>
+					<to>mm0_315_mm0_080_Decay</to>
+				</connector>
+				<connector uid="114" angle="225">
+					<from>Rate_of_Change_in_Composition</from>
+					<to>mm5_mm0_080_Decay</to>
+				</connector>
+				<connector uid="115" angle="187.765">
+					<from>Fmm20</from>
+					<to>mm20_mm14_Decay</to>
+				</connector>
+				<connector uid="116" angle="313.152">
+					<from>Fmm20</from>
+					<to>mm20_mm0_080_Decay</to>
+				</connector>
+				<connector uid="117" angle="276.34">
+					<from>Rate_of_Change_in_Composition</from>
+					<to>mm1_25_mm0_080_Decay</to>
+				</connector>
+				<connector uid="118" angle="298.706">
+					<from>Fmm14</from>
+					<to>mm14_mm0_080_Decay</to>
+				</connector>
+				<connector uid="119" angle="6.34019">
+					<from>
+						<alias uid="99"/>
+					</from>
+					<to>mm20_mm0_315_Decay</to>
+				</connector>
+				<connector uid="120" angle="0">
+					<from>
+						<alias uid="93"/>
+					</from>
+					<to>mm14_mm0_315_Decay</to>
+				</connector>
+				<connector uid="121" angle="333.435">
+					<from>
+						<alias uid="93"/>
+					</from>
+					<to>mm14_mm1_25_Decay</to>
+				</connector>
+				<connector uid="122" angle="308.66">
+					<from>Fmm20</from>
+					<to>mm20_mm0_315_Decay</to>
+				</connector>
+				<text_box color="black" font_family="Geneva" padding="5" border_width="thin" border_style="solid" appearance="transparent" uid="123" x="999" y="220" width="170" height="38">Particle Size Distribution Breakdown</text_box>
+				<stock color="blue" label_side="center" x="739" y="412" name="Fmm20"/>
+				<stock color="blue" label_side="center" x="652" y="413" name="Fmm14"/>
+				<stock color="blue" label_side="center" x="559" y="412" name="Fmm5"/>
+				<stock color="blue" label_side="center" x="464" y="412" name="Fmm1 25"/>
+				<flow color="blue" label_side="top" x="701.5" y="396" name="mm20 mm14\nDecay">
+					<pts>
+						<pt x="716.5" y="396"/>
+						<pt x="674.5" y="396"/>
+					</pts>
+				</flow>
+				<flow color="blue" label_side="top" x="611.5" y="396" name="mm14 mm5\nDecay">
+					<pts>
+						<pt x="629.5" y="396"/>
+						<pt x="581.5" y="396"/>
+					</pts>
+				</flow>
+				<flow color="blue" label_side="top" x="517.5" y="396" name="mm5 mm1 25\nDecay">
+					<pts>
+						<pt x="536.5" y="396"/>
+						<pt x="486.5" y="396"/>
+					</pts>
+				</flow>
+				<stock color="blue" label_side="center" x="381" y="412" name="Fmm0 315"/>
+				<flow color="blue" label_side="top" x="428.5" y="395" name="mm1 25 mm0 315\nDecay">
+					<pts>
+						<pt x="441.5" y="395"/>
+						<pt x="403.5" y="395"/>
+					</pts>
+				</flow>
+				<stock color="blue" label_side="center" x="294" y="412" name="Fmm0 080"/>
+				<flow color="blue" label_side="top" x="343.5" y="395" name="mm0 315 mm0 080\nDecay">
+					<pts>
+						<pt x="358.5" y="395"/>
+						<pt x="316.5" y="395"/>
+					</pts>
+				</flow>
+				<flow color="blue" label_side="left" x="509.75" y="751" name="mm20 mm0 080 Decay">
+					<pts>
+						<pt x="747.5" y="429.5"/>
+						<pt x="747.5" y="751"/>
+						<pt x="272" y="751"/>
+						<pt x="272" y="429.5"/>
+					</pts>
+				</flow>
+				<flow color="blue" label_side="left" x="548.563" y="730" name="mm20 mm0 315 Decay">
+					<pts>
+						<pt x="738.125" y="429.5"/>
+						<pt x="738.125" y="730"/>
+						<pt x="359" y="730"/>
+						<pt x="359" y="429.5"/>
+					</pts>
+				</flow>
+				<flow color="blue" label_side="left" x="584.929" y="711" name="mm20 mm1 25 Decay">
+					<pts>
+						<pt x="727.857" y="429.5"/>
+						<pt x="727.857" y="711"/>
+						<pt x="442" y="711"/>
+						<pt x="442" y="429.5"/>
+					</pts>
+				</flow>
+				<flow color="blue" label_side="left" x="628.5" y="692" name="mm20 mm5 Decay">
+					<pts>
+						<pt x="720" y="429.5"/>
+						<pt x="720" y="692"/>
+						<pt x="537" y="692"/>
+						<pt x="537" y="429.5"/>
+					</pts>
+				</flow>
+				<flow color="blue" label_side="left" x="470.563" y="661" name="mm14 mm0 080 Decay">
+					<pts>
+						<pt x="648.125" y="430.5"/>
+						<pt x="648.125" y="661"/>
+						<pt x="293" y="661"/>
+						<pt x="293" y="429.5"/>
+					</pts>
+				</flow>
+				<flow color="blue" label_side="left" x="505.188" y="643" name="mm14 mm0 315 Decay">
+					<pts>
+						<pt x="639.375" y="430.5"/>
+						<pt x="639.375" y="643"/>
+						<pt x="371" y="643"/>
+						<pt x="371" y="429.5"/>
+					</pts>
+				</flow>
+				<flow color="blue" label_side="left" x="541.5" y="624" name="mm14 mm1 25 Decay">
+					<pts>
+						<pt x="630" y="430.5"/>
+						<pt x="630" y="624"/>
+						<pt x="453" y="624"/>
+						<pt x="453" y="429.5"/>
+					</pts>
+				</flow>
+				<flow color="blue" label_side="left" x="415.063" y="224.375" name="mm5 mm0 080 Decay">
+					<pts>
+						<pt x="558.125" y="394.5"/>
+						<pt x="558.125" y="224.375"/>
+						<pt x="272" y="224.375"/>
+						<pt x="272" y="394.5"/>
+					</pts>
+				</flow>
+				<flow color="blue" label_side="left" x="454.5" y="256" name="mm5 mm0 315 Decay">
+					<pts>
+						<pt x="550" y="394.5"/>
+						<pt x="550" y="256"/>
+						<pt x="359" y="256"/>
+						<pt x="359" y="394.5"/>
+					</pts>
+				</flow>
+				<flow color="blue" label_side="left" x="388.5" y="288" name="mm1 25 mm0 080 Decay">
+					<pts>
+						<pt x="480" y="394.5"/>
+						<pt x="480" y="288"/>
+						<pt x="297" y="288"/>
+						<pt x="297" y="394.5"/>
+					</pts>
+				</flow>
+				<aux color="blue" label_side="top" x="531" y="177" name="Rate of Change in Composition"/>
+				<stock color="blue" label_side="center" x="193" y="408" name="Fmmlt 0 080"/>
+				<flow color="blue" label_side="top" x="249.5" y="396.75" name="mm0 080 mmlt0 080\nDecay">
+					<pts>
+						<pt x="271.5" y="396.75"/>
+						<pt x="215.5" y="396.75"/>
+					</pts>
+				</flow>
+				<connector uid="124" angle="186.34">
+					<from>
+						<alias uid="93"/>
+					</from>
+					<to>mm0_080_mmlt0_080_Decay</to>
+				</connector>
+				<connector uid="125" angle="159.444">
+					<from>Fmm0_080</from>
+					<to>mm0_080_mmlt0_080_Decay</to>
+				</connector>
+				<flow color="blue" label_side="left" x="464.813" y="801" name="mm20 mmlt0 080 Decay">
+					<pts>
+						<pt x="756.875" y="429.5"/>
+						<pt x="756.875" y="801"/>
+						<pt x="172.75" y="801"/>
+						<pt x="172.75" y="425.5"/>
+					</pts>
+				</flow>
+				<flow color="blue" label_side="left" x="425" y="686.375" name="mm14 mmlt0 080 Decay">
+					<pts>
+						<pt x="655.625" y="430.5"/>
+						<pt x="655.625" y="686.375"/>
+						<pt x="194.375" y="686.375"/>
+						<pt x="194.375" y="425.5"/>
+					</pts>
+				</flow>
+				<connector uid="126" angle="308.64">
+					<from>Fmm20</from>
+					<to>mm20_mmlt0_080_Decay</to>
+				</connector>
+				<connector uid="127" angle="137.083">
+					<from>
+						<alias uid="99"/>
+					</from>
+					<to>mm20_mmlt0_080_Decay</to>
+				</connector>
+				<connector uid="128" angle="299.087">
+					<from>Fmm14</from>
+					<to>mm14_mmlt0_080_Decay</to>
+				</connector>
+				<connector uid="129" angle="327.995">
+					<from>
+						<alias uid="93"/>
+					</from>
+					<to>mm14_mmlt0_080_Decay</to>
+				</connector>
+				<flow color="blue" label_side="left" x="373.438" y="195" name="mm5 mmlt0 080 Decay">
+					<pts>
+						<pt x="569.375" y="394.5"/>
+						<pt x="569.375" y="195"/>
+						<pt x="177.5" y="195"/>
+						<pt x="177.5" y="390.5"/>
+					</pts>
+				</flow>
+				<connector uid="130" angle="78.4166">
+					<from>Fmm5</from>
+					<to>mm5_mmlt0_080_Decay</to>
+				</connector>
+				<connector uid="131" angle="168.147">
+					<from>Rate_of_Change_in_Composition</from>
+					<to>mm5_mmlt0_080_Decay</to>
+				</connector>
+				<flow color="blue" label_side="left" x="326.25" y="274" name="mm1 25 mmlt0 080 Decay">
+					<pts>
+						<pt x="453.125" y="390"/>
+						<pt x="453.125" y="274"/>
+						<pt x="199.375" y="274"/>
+						<pt x="199.375" y="390.5"/>
+					</pts>
+				</flow>
+				<connector uid="132" angle="81.0851">
+					<from>Fmm1_25</from>
+					<to>mm1_25_mmlt0_080_Decay</to>
+				</connector>
+				<connector uid="133" angle="219.781">
+					<from>Rate_of_Change_in_Composition</from>
+					<to>mm1_25_mmlt0_080_Decay</to>
+				</connector>
+				<alias color="blue" font_style="italic" uid="93" x="502" y="521" width="18" height="18">
+					<of>Rate_of_Change_in_Composition</of>
+				</alias>
+				<alias color="blue" font_style="italic" uid="99" x="496" y="831" width="18" height="18">
+					<of>Rate_of_Change_in_Composition</of>
+				</alias>
+			</view>
+			<view page_height="528" background="white" page_width="788" home_view="true" type="interface">
+				<style/>
+			</view>
+			<isee:templates/>
+			<isee:stories/>
+		</views>
+	</model>
+	<model name="Gravel_Loss">
+		<variables>
+			<aux name="Rate of loss per m per annual daily car passage">
+				<eqn>0.56</eqn>
+				<units>kg/(m-annualy daily car passage)</units>
+			</aux>
+			<aux name="Annual daily\ncar passage">
+				<eqn>400</eqn>
+				<units>annualy daily car passage</units>
+			</aux>
+			<aux name="Gravel density">
+				<eqn>1800</eqn>
+				<units>kg/cubic meter</units>
+			</aux>
+			<aux name="Gravel Lost\nAnnually">
+				<eqn>(Rate_of_loss_per_m_per_annual_daily_car_passage*Road_Length*Annual_daily_car_passage)/Gravel_density</eqn>
+				<units>cubic meter</units>
+			</aux>
+			<aux name="Road Length" access="input">
+				<units>meters</units>
+			</aux>
+			<aux name="Road Volume" access="input">
+				<units>Cubic Meters</units>
+			</aux>
+			<aux name="Gravel Loss Rate" access="output">
+				<eqn>Gravel_Lost_Annually/Road_Volume</eqn>
+				<units>unitless</units>
+			</aux>
+		</variables>
+		<views>
+			<view isee:show_pages="false" background="white" page_width="584" page_height="764" isee:page_cols="2" isee:scroll_x="1" isee:scroll_y="101.5" zoom="200" isee:popup_graphs_are_comparative="true" type="stock_flow">
+				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
+					<stock color="blue" background="white" font_color="blue" font_size="9pt" label_side="top">
+						<shape type="rectangle" width="45" height="35"/>
+					</stock>
+					<flow color="blue" background="white" font_color="blue" font_size="9pt" label_side="bottom"/>
+					<isee:placeholder color="#228B22" background="white" font_color="#228B22" font_size="9pt" label_side="bottom"/>
+					<module color="blue" background="white" font_color="blue" font_size="9pt" label_side="top">
+						<shape type="rectangle" width="55" height="45"/>
+					</module>
+					<aux color="blue" background="white" font_color="blue" font_size="9pt" label_side="bottom">
+						<shape type="circle" radius="18"/>
+					</aux>
+					<group color="red" background="white" font_color="red" font_size="9pt"/>
+					<connector color="#FF007F" background="white" font_color="#FF007F" font_size="9pt" isee:thickness="1"/>
+					<text_box color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt"/>
+					<isee:loop_indicator color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt"/>
+					<numeric_display color="blue" background="white" font_size="9pt" isee:transparent="false"/>
+					<graph color="black" background="white" font_size="12pt" axis_color="#666666" grid_color="#C8C8C8" isee:graph_area_color="white" legend_position="bottom" isee:transparent="false" isee:hide_border="false" axis_title_font_style="normal" axis_title_font_weight="normal" axis_title_text_decoration="none" axis_title_text_align="center" axis_title_vertical_text_align="center" axis_title_font_color="black" axis_title_font_family="Arial" axis_title_font_size="12pt" axis_title_text_padding="2" axis_title_text_border_color="black" axis_title_text_border_width="thin" axis_title_text_border_style="none" axis_label_font_style="normal" axis_label_font_weight="normal" axis_label_text_decoration="none" axis_label_text_align="center" axis_label_vertical_text_align="center" axis_label_font_color="black" axis_label_font_family="Arial" axis_label_font_size="9pt" axis_label_text_padding="2" axis_label_text_border_color="black" axis_label_text_border_width="thin" axis_label_text_border_style="none">
+						<isee:series_styles>
+							<isee:series_style color="blue" thickness="1"/>
+							<isee:series_style color="red" thickness="1" pen_style="dot_dashed"/>
+							<isee:series_style color="fuchsia" thickness="1" pen_style="dotted"/>
+							<isee:series_style color="#008F44" thickness="1" pen_style="dashed"/>
+							<isee:series_style color="#FF7F00" thickness="1"/>
+							<isee:series_style color="#7F00FF" thickness="1" pen_style="dot_dashed"/>
+							<isee:series_style color="#0CA0FF" thickness="1" pen_style="dotted"/>
+							<isee:series_style color="lime" thickness="1" pen_style="dashed"/>
+							<isee:series_style color="#FF007F" thickness="1"/>
+							<isee:series_style color="aqua" thickness="1" pen_style="dot_dashed"/>
+							<isee:series_style color="#F586FF" thickness="1" pen_style="dotted"/>
+							<isee:series_style color="black" thickness="1" pen_style="dashed"/>
+							<isee:series_style color="#C8C8C8" thickness="1"/>
+						</isee:series_styles>
+					</graph>
+					<table color="black" background="#E0E0E0" text_align="right" font_size="12pt" orientation="vertical" wrap_text="false" isee:auto_fit="true" isee:use_alternate_row_colors="false" isee:unlimited_table_length="false" blank_column_width="80" column_width="160" interval="1" report_balances="beginning" report_flows="instantaneous" header_font_style="normal" header_font_weight="normal" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="12pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
+				</style>
+				<connector uid="134" angle="353.66">
+					<from>Annual_daily_car_passage</from>
+					<to>Gravel_Lost_Annually</to>
+				</connector>
+				<connector uid="135" angle="324.462">
+					<from>Road_Length</from>
+					<to>Gravel_Lost_Annually</to>
+				</connector>
+				<connector uid="136" angle="347.471">
+					<from>Gravel_Lost_Annually</from>
+					<to>Gravel_Loss_Rate</to>
+				</connector>
+				<connector uid="137" angle="333.435">
+					<from>Road_Volume</from>
+					<to>Gravel_Loss_Rate</to>
+				</connector>
+				<connector uid="138" angle="20.556">
+					<from>Gravel_density</from>
+					<to>Gravel_Lost_Annually</to>
+				</connector>
+				<connector uid="139" angle="343.091">
+					<from>Rate_of_loss_per_m_per_annual_daily_car_passage</from>
+					<to>Gravel_Lost_Annually</to>
+				</connector>
+				<stacked_container uid="140" x="613" y="24" width="465" height="286" minimized="true" name="Table 1">
+					<table background="#E0E0E0" font_size="9pt" orientation="vertical" column_width="59" interval="DT" report_balances="ending" report_flows="summed" width="465" height="286" title="Untitled Table">
+						<item type="time"/>
+						<item>
+							<format precision="0.01" scale_by="1" delimit_000s="true"/>
+							<entity name="Gravel_Lost_Annually"/>
+						</item>
+						<item>
+							<format precision="max" scale_by="1" delimit_000s="true"/>
+							<entity name="Gravel_Loss_Rate"/>
+						</item>
+					</table>
+				</stacked_container>
+				<aux color="blue" label_side="left" x="259" y="257" name="Rate of loss per m per annual daily car passage"/>
+				<aux color="blue" label_side="left" x="245" y="306" name="Annual daily\ncar passage"/>
+				<aux color="blue" label_side="left" x="264" y="337" name="Gravel density"/>
+				<aux color="blue" x="384" y="295" name="Gravel Lost\nAnnually"/>
+				<aux color="blue" font_weight="bold" label_side="top" x="281" y="226" name="Road Length"/>
+				<aux color="blue" font_weight="bold" label_side="top" x="427" y="256" name="Road Volume"/>
+				<aux color="blue" label_side="right" x="499" y="294" name="Gravel Loss Rate"/>
+			</view>
+			<view page_height="528" background="white" page_width="788" home_view="true" type="interface">
+				<style/>
+			</view>
+			<isee:templates/>
+			<isee:stories/>
+		</views>
+	</model>
+	<model name="Maintenance_Frequency" run="true">
+		<variables>
+			<aux name="Gravel Addition" access="output">
+				<eqn>IF Yes_or_No_For_Maintenance_Event = 1 AND TIME &gt; 0.1 THEN Amount_of_Road_Material_Lost ELSE 0</eqn>
+				<units>Meters</units>
+			</aux>
+			<aux name="Yes or No For\nMaintenance Event">
+				<eqn>IF(TIME = Cycle_Count*(1/Annual_Maintenance_Frequency) OR TIME = 0) THEN 1 ELSE 0</eqn>
+				<units>unitless</units>
+			</aux>
+			<flow name="Cycle Input">
+				<eqn>Yes_or_No_For_Maintenance_Event*12</eqn>
+				<non_negative/>
+				<units>Number of Maintenance Cycles/Years</units>
+			</flow>
+			<stock name="Cycle\nCount">
+				<eqn>0</eqn>
+				<inflow>Cycle_Input</inflow>
+				<non_negative/>
+				<units>Number of Maintenance Cycles</units>
+			</stock>
+			<aux name="Annual Maintenance\nFrequency">
+				<doc>In Number of Maintenance Events pe year</doc>
+				<eqn>1/2</eqn>
+				<units>Maintenance events per year</units>
+			</aux>
+			<aux name="Amount of Road\nMaterial Lost" access="input">
+				<units>Meters/Year</units>
+			</aux>
+		</variables>
+		<views>
+			<view isee:show_pages="false" background="white" page_width="584" page_height="764" isee:page_cols="2" zoom="120" isee:popup_graphs_are_comparative="true" type="stock_flow">
+				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
+					<stock color="blue" background="white" font_color="blue" font_size="9pt" label_side="top">
+						<shape type="rectangle" width="45" height="35"/>
+					</stock>
+					<flow color="blue" background="white" font_color="blue" font_size="9pt" label_side="bottom"/>
+					<isee:placeholder color="#228B22" background="white" font_color="#228B22" font_size="9pt" label_side="bottom"/>
+					<module color="blue" background="white" font_color="blue" font_size="9pt" label_side="top">
+						<shape type="rectangle" width="55" height="45"/>
+					</module>
+					<aux color="blue" background="white" font_color="blue" font_size="9pt" label_side="bottom">
+						<shape type="circle" radius="18"/>
+					</aux>
+					<group color="red" background="white" font_color="red" font_size="9pt"/>
+					<connector color="#FF007F" background="white" font_color="#FF007F" font_size="9pt" isee:thickness="1"/>
+					<text_box color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt"/>
+					<isee:loop_indicator color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt"/>
+					<numeric_display color="blue" background="white" font_size="9pt" isee:transparent="false"/>
+					<graph color="black" background="white" font_size="12pt" axis_color="#666666" grid_color="#C8C8C8" isee:graph_area_color="white" legend_position="bottom" isee:transparent="false" isee:hide_border="false" axis_title_font_style="normal" axis_title_font_weight="normal" axis_title_text_decoration="none" axis_title_text_align="center" axis_title_vertical_text_align="center" axis_title_font_color="black" axis_title_font_family="Arial" axis_title_font_size="12pt" axis_title_text_padding="2" axis_title_text_border_color="black" axis_title_text_border_width="thin" axis_title_text_border_style="none" axis_label_font_style="normal" axis_label_font_weight="normal" axis_label_text_decoration="none" axis_label_text_align="center" axis_label_vertical_text_align="center" axis_label_font_color="black" axis_label_font_family="Arial" axis_label_font_size="9pt" axis_label_text_padding="2" axis_label_text_border_color="black" axis_label_text_border_width="thin" axis_label_text_border_style="none">
+						<isee:series_styles>
+							<isee:series_style color="blue" thickness="1"/>
+							<isee:series_style color="red" thickness="1" pen_style="dot_dashed"/>
+							<isee:series_style color="fuchsia" thickness="1" pen_style="dotted"/>
+							<isee:series_style color="#008F44" thickness="1" pen_style="dashed"/>
+							<isee:series_style color="#FF7F00" thickness="1"/>
+							<isee:series_style color="#7F00FF" thickness="1" pen_style="dot_dashed"/>
+							<isee:series_style color="#0CA0FF" thickness="1" pen_style="dotted"/>
+							<isee:series_style color="lime" thickness="1" pen_style="dashed"/>
+							<isee:series_style color="#FF007F" thickness="1"/>
+							<isee:series_style color="aqua" thickness="1" pen_style="dot_dashed"/>
+							<isee:series_style color="#F586FF" thickness="1" pen_style="dotted"/>
+							<isee:series_style color="black" thickness="1" pen_style="dashed"/>
+							<isee:series_style color="#C8C8C8" thickness="1"/>
+						</isee:series_styles>
+					</graph>
+					<table color="black" background="#E0E0E0" text_align="right" font_size="12pt" orientation="vertical" wrap_text="false" isee:auto_fit="true" isee:use_alternate_row_colors="false" isee:unlimited_table_length="false" blank_column_width="80" column_width="160" interval="1" report_balances="beginning" report_flows="instantaneous" header_font_style="normal" header_font_weight="normal" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="12pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
+				</style>
+				<connector uid="141" angle="151.39">
+					<from>Cycle_Count</from>
+					<to>Yes_or_No_For_Maintenance_Event</to>
+				</connector>
+				<connector uid="142" angle="270">
+					<from>Amount_of_Road_Material_Lost</from>
+					<to>Gravel_Addition</to>
+				</connector>
+				<connector uid="143" angle="257.471">
+					<from>Yes_or_No_For_Maintenance_Event</from>
+					<to>Cycle_Input</to>
+				</connector>
+				<connector uid="144" angle="26.5651">
+					<from>Yes_or_No_For_Maintenance_Event</from>
+					<to>Gravel_Addition</to>
+				</connector>
+				<connector uid="145" angle="297.096">
+					<from>Annual_Maintenance_Frequency</from>
+					<to>Yes_or_No_For_Maintenance_Event</to>
+				</connector>
+				<stacked_container uid="146" x="438" y="25" width="684" height="392" name="Table 1">
+					<table background="#E0E0E0" font_size="9pt" orientation="vertical" column_width="59" interval="DT" report_balances="ending" report_flows="summed" width="684" height="392" title="Untitled Table">
+						<item type="time"/>
+						<item>
+							<format precision="0.01" scale_by="1" delimit_000s="true"/>
+							<entity name="Yes_or_No_For_Maintenance_Event"/>
+						</item>
+						<item>
+							<format precision="0.01" scale_by="1" delimit_000s="true"/>
+							<entity name="Cycle_Count"/>
+						</item>
+						<item>
+							<format precision="0.01" scale_by="1" delimit_000s="true"/>
+							<entity name="Cycle_Input"/>
+						</item>
+						<item>
+							<format precision="0.01" scale_by="1" delimit_000s="true"/>
+							<entity name="Gravel_Addition"/>
+						</item>
+					</table>
+				</stacked_container>
+				<aux color="blue" label_side="right" x="236" y="239" name="Gravel Addition"/>
+				<aux color="blue" label_side="left" x="196" y="271" name="Yes or No For\nMaintenance Event"/>
+				<flow x="213.25" y="338" name="Cycle Input">
+					<pts>
+						<pt x="139" y="338"/>
+						<pt x="287.5" y="338"/>
+					</pts>
+				</flow>
+				<stock color="blue" label_side="center" x="310" y="324" name="Cycle\nCount"/>
+				<aux color="blue" label_side="left" x="174" y="228" name="Annual Maintenance\nFrequency"/>
+				<aux color="blue" font_weight="bold" label_side="top" x="224" y="186" name="Amount of Road\nMaterial Lost"/>
+			</view>
+			<view page_height="528" background="white" page_width="788" home_view="true" type="interface">
+				<style/>
+			</view>
+			<isee:templates/>
+			<isee:stories/>
+		</views>
+	</model>
+</xmile>
+
